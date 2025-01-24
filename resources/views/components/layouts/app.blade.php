@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Josue Molina' }}</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('Images/marcaX.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>   
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-green-500">
+<body class="bg-neutral">
     <div class="min-h-screen bg-cover img-home  bg-center flex flex-col" style="background-image: url('{{ asset('Images/ampli-finalv1.png') }}');">
         <!-- Navbar -->
         <nav id="navbar" class="navbar fixed top-4 transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg">
