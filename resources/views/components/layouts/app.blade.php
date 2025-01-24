@@ -81,7 +81,7 @@
     <!-- Footer -->
     <footer class="bg-black mt-5 bg-opacity-50 text-white text-center py-4 mt-auto">
         <div class="container mx-auto">
-            <p class="text-sm">&copy; 2023 Josue Molina. Todos los derechos reservados.</p>
+            <p class="text-sm font-begum ">&copy; 2023 Josue Molina. Todos los derechos reservados.</p>
             <div class="mt-2">
                 <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-twitter"></i></a>
