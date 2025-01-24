@@ -6,13 +6,14 @@
     <title>{{ $title ?? 'Josue Molina' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>   
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-    <div class="min-h-screen bg-cover bg-center flex flex-col" style="background-image: url('{{ asset('Images/FondoInicio.png') }}');">
+<body class="bg-green-500">
+    <div class="min-h-screen bg-cover img-home  bg-center flex flex-col" style="background-image: url('{{ asset('Images/ampli-finalv1.png') }}');">
         <!-- Navbar -->
-        <nav id="navbar" class="navbar fixed top-4 left-4 right-4 rounded-lg transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg">
-            <div class="navbar-start ">
+        <nav id="navbar" class="navbar fixed top-4 transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg">
+            <div class="navbar-start">
                 <!-- Logo -->
                 <a class="btn btn-ghost text-xl">
                     <img src="{{ asset('Images/marcaX.png') }}" alt="Logo" width="40" height="auto" class="d-inline-block align-text-top">
@@ -20,43 +21,77 @@
                     Josue Molina
                 </a>
             </div>
-            <div class="navbar-end ">
-                <a class="btn btn-ghost text-lg ">Home</a>
-                <a class="btn btn-ghost text-lg ">Projects</a>
-                <a class="btn btn-ghost text-lg ">Contact</a>
+            <div class="navbar-end">
+                <a class="btn btn-ghost text-lg">Home</a>
+                <a class="btn btn-ghost text-lg">Projects</a>
+                <a class="btn btn-ghost text-lg">Contact</a>
             </div>
         </nav>
-        
+        <!-- Texto en la esquina inferior derecha -->
+        <div class="absolute bottom-10 right-4 text-white max-w-xs bg-black bg-opacity-50 p-4 rounded-lg">
+            <p class="text-lg">Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo cinematográfico único que refleja su visión auténtica del mundo.</p>
+        </div>
+    </div>
 
-        <!-- Contenido principal -->
-        {{ $slot }}
-
-        <!-- Footer -->
-        <footer class="bg-black bg-opacity-50 text-white text-center py-4 mt-auto">
-            <div class="container mx-auto">
-                <p class="text-sm">&copy; 2023 Josue Molina. Todos los derechos reservados.</p>
-                <div class="mt-2">
-                    <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-github"></i></a>
+    <!-- Contenido principal -->
+    <section class="min-h-screen flex flex-col items-center justify-center  py-12">
+        <h2 class="text-4xl font-bold mb-8">Proyectos</h2>
+        <div class="flex w-full flex-col lg:flex-row max-w-7xl mx-4 lg:mx-8">
+            <!-- Primer card con contenido del hero -->
+            <div class="card bg-base-300 rounded-box grid h-96 flex-grow place-items-center relative overflow-hidden mx-4 lg:mx-8">
+                <div class="hero w-full h-full">
+                    <img src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp" 
+                         alt="Fotografía" 
+                         class="hero-image w-full h-full object-cover">
+                    <div class="hero-content text-neutral-content text-center absolute inset-0 flex items-center justify-center">
+                        <div class="max-w-md">
+                            <h1 class="mb-5 text-5xl font-bold">Fotografía</h1>
+                            <p class="mb-5">
+                                Explora mis trabajos de fotografía, capturando momentos únicos con un estilo cinematográfico.
+                            </p>
+                            <button class="btn btn-primary">Ver más</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
 
-        <!-- Script para el navbar -->
-        <script>
-            window.addEventListener('scroll', function () {
-                var navbar = document.getElementById('navbar');
-                if (window.scrollY > 10) {
-                    navbar.classList.remove('top-4', 'left-4', 'right-4', 'rounded-lg');
-                    navbar.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'mt-0', 'mx-0', 'rounded-none', 'bg-opacity-90', 'shadow-lg');
-                } else {
-                    navbar.classList.remove('fixed', 'top-0', 'left-0', 'right-0', 'mt-0', 'mx-0', 'rounded-none', 'bg-opacity-90', 'shadow-lg');
-                    navbar.classList.add('top-4', 'left-4', 'right-4', 'rounded-lg');
-                }
-            });
-        </script>
-    </div>
+            <!-- Divider -->
+            <div class="divider lg:divider-horizontal"></div>
+
+            <!-- Segundo card con contenido del hero -->
+            <div class="card bg-base-300 rounded-box grid h-96 flex-grow place-items-center relative overflow-hidden mx-4 lg:mx-8">
+                <div class="hero w-full h-full">
+                    <img src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp" 
+                         alt="Videos" 
+                         class="hero-image w-full h-full object-cover">
+                    <div class="hero-content text-neutral-content text-center absolute inset-0 flex items-center justify-center">
+                        <div class="max-w-md">
+                            <h1 class="mb-5 text-5xl font-bold">Videos</h1>
+                            <p class="mb-5">
+                                Descubre mis proyectos de video, donde cada historia cobra vida con un enfoque creativo y profesional.
+                            </p>
+                            <button class="btn btn-primary">Ver más</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black mt-5 bg-opacity-50 text-white text-center py-4 mt-auto">
+        <div class="container mx-auto">
+            <p class="text-sm">&copy; 2023 Josue Molina. Todos los derechos reservados.</p>
+            <div class="mt-2">
+                <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para el navbar -->
+    
 </body>
 </html>
