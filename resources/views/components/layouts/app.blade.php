@@ -14,7 +14,7 @@
 <body class="color-body">
     <div class="min-h-screen bg-cover bg-center flex flex-col" style="background-image: url('{{ asset('Images/ampli-final2.png') }}');">
         <!-- Navbar -->
-        <nav id="navbar" class="navbar fixed top-4 transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg">
+        <nav id="navbar" class="navbar font-begum fixed top-4 transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg">
             <div class="navbar-start">
                 <!-- Logo -->
                 <a class="btn btn-ghost text-xl">
@@ -31,13 +31,13 @@
         </nav>
         <!-- Texto en la esquina inferior derecha -->
         <div class="absolute bottom-10 right-4 text-white max-w-xs bg-black bg-opacity-50 p-4 rounded-lg">
-            <p class="text-lg">Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo cinematográfico único que refleja su visión auténtica del mundo.</p>
+            <p class="text-lg font-begum ">Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo cinematográfico único que refleja su visión auténtica del mundo.</p>
         </div>
     </div>
 
     <!-- Contenido principal -->
     <section class="min-h-screen flex flex-col items-center justify-center  py-12">
-        <h2 class="text-4xl font-bold text-white mb-8">Proyectos</h2>
+        <h2 class="text-4xl font-bold text-white font-begum mb-8">Proyectos</h2>
         <div class="flex w-full flex-col lg:flex-row max-w-7xl mx-4 lg:mx-8">
             <!-- Primer card con contenido del hero -->
             <div class="card bg-base-300 rounded-box grid h-96 flex-grow place-items-center relative overflow-hidden mx-4 lg:mx-8">
@@ -47,18 +47,17 @@
                          class="hero-image w-full h-full object-cover">
                     <div class="hero-content text-neutral-content text-center absolute inset-0 flex items-center justify-center">
                         <div class="max-w-md">
-                            <h1 class="mb-5 text-5xl font-bold">Fotografía</h1>
-                            <p class="mb-5">
+                            <h1 class="mb-5 text-5xl font-begum font-bold">Fotografía</h1>
+                            <p class="mb-5 font-begum ">
                                 Explora mis trabajos de fotografía, capturando momentos únicos con un estilo cinematográfico.
                             </p>
-                            <button class="btn btn-primary">Ver más</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Divider -->
-            <div class="divider lg:divider-horizontal"></div>
+            <div class="divider bg-base-100 lg:divider-horizontal"></div>
 
             <!-- Segundo card con contenido del hero -->
             <div class="card bg-base-300 rounded-box grid h-96 flex-grow place-items-center relative overflow-hidden mx-4 lg:mx-8">
@@ -68,11 +67,10 @@
                          class="hero-image w-full h-full object-cover">
                     <div class="hero-content text-neutral-content text-center absolute inset-0 flex items-center justify-center">
                         <div class="max-w-md">
-                            <h1 class="mb-5 text-5xl font-bold">Videos</h1>
-                            <p class="mb-5">
+                            <h1 class="mb-5 text-5xl font-begum  font-bold">Videos</h1>
+                            <p class="mb-5 font-begum ">
                                 Descubre mis proyectos de video, donde cada historia cobra vida con un enfoque creativo y profesional.
                             </p>
-                            <button class="btn btn-primary">Ver más</button>
                         </div>
                     </div>
                 </div>
