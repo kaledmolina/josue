@@ -36,47 +36,50 @@
     </div>
 
     <!-- Contenido principal -->
-    <section class="min-h-screen flex flex-col items-center justify-center  py-12">
-        <h2 class="text-4xl font-bold text-white font-begum mb-8">Proyectos</h2>
-        <div class="flex w-full flex-col lg:flex-row max-w-7xl mx-4 lg:mx-8">
-            <!-- Primer card con contenido del hero -->
-            <div class="card bg-base-300 rounded-box grid h-96 flex-grow place-items-center relative overflow-hidden mx-4 lg:mx-8">
-                <div class="hero w-full h-full">
-                    <img src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp" 
+    <section class="min-h-screen flex flex-col items-center justify-center py-12">
+    <h2 class="text-4xl font-bold text-white font-begum mb-8">Proyectos</h2>
+    <div class="flex w-full flex-col lg:flex-row max-w-7xl mx-4 lg:mx-8">
+        <!-- Primer card -->
+        <a href="/ruta-fotografia" class="card group bg-base-300 rounded-box flex-grow h-96 relative overflow-hidden mx-4 lg:mx-8 transition-transform duration-300 hover:scale-105">
+            <div class="hero w-full h-full">
+                <div class="aspect-square w-full h-full"> <!-- Contenedor para relación de aspecto -->
+                    <img src="{{ asset('Images/fotos.jpg') }}" 
                          alt="Fotografía" 
-                         class="hero-image w-full h-full object-cover">
-                    <div class="hero-content text-neutral-content text-center absolute inset-0 flex items-center justify-center">
-                        <div class="max-w-md">
-                            <h1 class="mb-5 text-5xl font-begum font-bold">Fotografía</h1>
-                            <p class="mb-5 font-begum ">
-                                Explora mis trabajos de fotografía, capturando momentos únicos con un estilo cinematográfico.
-                            </p>
-                        </div>
+                         class="w-full h-full object-cover object-center">
+                </div>
+                <div class="hero-content text-neutral-content text-center absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-300 group-hover:bg-black/40">
+                    <div class="max-w-md p-4">
+                        <h1 class="mb-5 text-5xl font-begum font-bold">Fotografía</h1>
+                        <p class="mb-5 font-begum">
+                            Explora mis trabajos de fotografía, capturando momentos únicos con un estilo cinematográfico.
+                        </p>
                     </div>
                 </div>
             </div>
+        </a>
 
-            <!-- Divider -->
-            <div class="divider bg-base-100 lg:divider-horizontal"></div>
+        <div class="divider bg-base-100 lg:divider-horizontal"></div>
 
-            <!-- Segundo card con contenido del hero -->
-            <div class="card bg-base-300 rounded-box grid h-96 flex-grow place-items-center relative overflow-hidden mx-4 lg:mx-8">
-                <div class="hero w-full h-full">
-                    <img src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp" 
+        <!-- Segundo card -->
+        <a href="/ruta-videos" class="card group bg-base-300 rounded-box flex-grow h-96 relative overflow-hidden mx-4 lg:mx-8 transition-transform duration-300 hover:scale-105">
+            <div class="hero w-full h-full">
+                <div class="aspect-square w-full h-full"> <!-- Contenedor para relación de aspecto -->
+                    <img src="{{ asset('Images/pa-videos.png') }}" 
                          alt="Videos" 
-                         class="hero-image w-full h-full object-cover">
-                    <div class="hero-content text-neutral-content text-center absolute inset-0 flex items-center justify-center">
-                        <div class="max-w-md">
-                            <h1 class="mb-5 text-5xl font-begum  font-bold">Videos</h1>
-                            <p class="mb-5 font-begum ">
-                                Descubre mis proyectos de video, donde cada historia cobra vida con un enfoque creativo y profesional.
-                            </p>
-                        </div>
+                         class="w-full h-full object-cover object-center">
+                </div>
+                <div class="hero-content text-neutral-content text-center absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-300 group-hover:bg-black/40">
+                    <div class="max-w-md p-4">
+                        <h1 class="mb-5 text-5xl font-begum font-bold">Videos</h1>
+                        <p class="mb-5 font-begum">
+                            Descubre mis proyectos de video, donde cada historia cobra vida con un enfoque creativo y profesional.
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </a>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="bg-black mt-5 bg-opacity-50 text-white text-center py-4 mt-auto">
