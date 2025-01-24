@@ -11,8 +11,8 @@
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>   
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-neutral">
-    <div class="min-h-screen bg-cover img-home  bg-center flex flex-col" style="background-image: url('{{ asset('Images/ampli-finalv1.png') }}');">
+<body class="color-body">
+    <div class="min-h-screen bg-cover bg-center flex flex-col" style="background-image: url('{{ asset('Images/ampli-final2.png') }}');">
         <!-- Navbar -->
         <nav id="navbar" class="navbar fixed top-4 transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg">
             <div class="navbar-start">
@@ -37,7 +37,7 @@
 
     <!-- Contenido principal -->
     <section class="min-h-screen flex flex-col items-center justify-center  py-12">
-        <h2 class="text-4xl font-bold mb-8">Proyectos</h2>
+        <h2 class="text-4xl font-bold text-white mb-8">Proyectos</h2>
         <div class="flex w-full flex-col lg:flex-row max-w-7xl mx-4 lg:mx-8">
             <!-- Primer card con contenido del hero -->
             <div class="card bg-base-300 rounded-box grid h-96 flex-grow place-items-center relative overflow-hidden mx-4 lg:mx-8">

@@ -2,11 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 /* resources/css/app.css */
-.img-home{
-    mask-image: linear-gradient(
-        rgb(10, 19, 61) 97%,
-        transparent
-    );
+.color-body{
+    background-color: #000712;
 }
 .hero-image {
     filter: blur(5px); /* Desenfoque inicial */
