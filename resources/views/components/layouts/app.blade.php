@@ -21,7 +21,7 @@
         </div>
         <div class="navbar-end">
             <a class="btn btn-ghost text-lg" wire:navigate href="/">Inicio</a>
-            <a class="btn btn-ghost text-lg"  href="#proyectos">Proyectos</a>
+            <a class="btn btn-ghost text-lg"  href="{{ route('home') }}#proyectos">Proyectos</a>
             <a class="btn btn-ghost text-lg" wire:navigate href="/contact">Contact</a>
         </div>
     </nav>
