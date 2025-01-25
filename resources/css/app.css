@@ -30,3 +30,21 @@
 .hero:hover .hero-content {
     opacity: 0; /* Ocultar texto al pasar el cursor */
 }
+/* Estilo para el navbar */
+.navbar {
+    background-color: transparent; /* Hace el fondo transparente */
+    position: absolute; /* Asegura que se superponga sobre el contenido */
+    width: 100%; /* Se extiende a todo el ancho */
+    z-index: 10; /* Se asegura de estar sobre otros elementos */
+}
+
+/* Opcional: Estilo para los enlaces del navbar */
+.navbar a {
+    color: white; /* Cambia el color del texto */
+    text-decoration: none;
+    padding: 10px;
+}
+
+.navbar a:hover {
+    color: #f0f0f0; /* Color más claro al pasar el mouse */
+}
