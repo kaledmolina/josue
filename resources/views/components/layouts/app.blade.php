@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    {{ $styles ?? '' }}
 </head>
 <body class="color-body">
     <!-- Navbar -->
@@ -21,8 +20,9 @@
         </div>
         <div class="navbar-end">
             <a class="btn btn-ghost text-lg" wire:navigate href="/">Inicio</a>
-            <a class="btn btn-ghost text-lg"  href="{{ route('home') }}#proyectos">Proyectos</a>
-            <a class="btn btn-ghost text-lg" wire:navigate href="/contact">Contact</a>
+            <a class="btn btn-ghost text-lg"  href="/proyectos">Proyectos</a>
+            <a class="btn btn-ghost text-lg"  href="/contacto">Contacto</a>
+            <a class="btn btn-ghost text-lg"  href="/acerca">Acerca</a>
         </div>
     </nav>
 
@@ -43,7 +43,5 @@
             </div>
         </div>
     </footer>
-
-    {{ $scripts ?? '' }}
 </body>
 </html>
