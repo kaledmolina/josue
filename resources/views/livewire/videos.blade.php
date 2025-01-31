@@ -27,6 +27,26 @@
                 </div>
             </div>
             @endforeach
+
+            <!-- Cargar más videos cuando el usuario llegue al final -->
+            <div x-data="{
+                init() {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                @this.call('loadMore');
+                            }
+                        });
+                    }, {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.5
+                    });
+
+                    observer.observe(this.$el);
+                }
+            }" x-init="init">
+            </div>
         </section>
     </div>
 </div>

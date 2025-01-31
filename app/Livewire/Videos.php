@@ -3,23 +3,25 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\Video;
-
-
 
 class Videos extends Component
 {
+    use WithPagination;
 
-    public $videos;
+    public $perPage = 5; // Número de videos por página
 
-    public function mount()
+    protected $listeners = ['loadMore' => 'loadMore'];
+
+    public function loadMore()
     {
-        // Obtener todos los videos desde la base de datos
-        $this->videos = Video::all()->toArray();
+        $this->perPage += 5; // Incrementa la cantidad de videos a mostrar
     }
-    
+
     public function render()
     {
-        return view('livewire.videos');
+        $videos = Video::paginate($this->perPage);
+        return view('livewire.videos', ['videos' => $videos]);
     }
 }
