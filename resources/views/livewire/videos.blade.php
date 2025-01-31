@@ -10,9 +10,10 @@
                     <div class="w-full lg:w-1/2 aspect-video">
                         <iframe 
                             class="w-full h-full rounded-lg shadow-xl"
-                            src="{{ $video['url'] }}"
+                            src="{{ $video->embed_url }}"
                             title="{{ $video['title'] }}"
                             frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen>
                         </iframe>
                     </div>
@@ -21,7 +22,7 @@
                     <div class="w-full lg:w-1/2 flex items-center p-6 rounded-lg">
                         <div class="text-white font-begum space-y-4 text-justify">
                             <h3 class="text-3xl font-bold mb-4">{{ $video['title'] }}</h3>
-                            {!! nl2br(e($video['description'])) !!}
+                            {!! $video->description !!}
                         </div>
                     </div>
                 </div>
