@@ -3,11 +3,19 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Livewire\Attributes\Layout;
 
-#[Layout('components.layouts.app')]
+
 class Videos extends Component
 {
+
+    public $videos;
+
+    public function mount()
+    {
+        // Obtener todos los videos desde la base de datos
+        $this->videos = Video::all()->toArray();
+    }
+    /*
     public $videos = [
         [
             'title' => 'La Quiteña Bonita',
@@ -43,7 +51,7 @@ class Videos extends Component
             ,
             'alignment' => 'right'
         ]
-    ];
+    ]; */
     public function render()
     {
         return view('livewire.videos');

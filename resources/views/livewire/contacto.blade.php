@@ -1,5 +1,5 @@
 <section class=" min-h-screen relative text-white py-28" style="background-image: url('{{ asset('Images/contador.png') }}');">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="absolute inset-0 bg-black/60 "></div>
         
         <div class="container mx-auto text-center relative z-10 max-w-7xl px-4 lg:px-8">
             <!-- Estadísticas -->
