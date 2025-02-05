@@ -20,8 +20,8 @@ class FileResource extends Resource
 {
     protected static ?string $model = File::class;
     protected static ?string $navigationIcon = 'heroicon-o-document';
-    protected static ?string $navigationGroup = 'Contenido';
-    protected static ?int $navigationSort = 3;
+    protected static ?string $navigationGroup = 'Galeria';
+    
 
     public static function form(Form $form): Form
     {
