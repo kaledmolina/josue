@@ -1,61 +1,39 @@
 <?php
+
+namespace App\Livewire;
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Album;
 
 class Fotografias extends Component
 {
-    public $albumId = null;
-    public $selectedPhoto = null;
+    public $albums = [];
 
-    public function getAlbums()
+    public function mount()
     {
-        return [
-            1 => [
-                'id' => 1,
-                'title' => 'Vacaciones de Verano 2023',
-                'date' => '15 Junio 2023',
-                'cover' => asset('Images/ampli-final2.png'),
-                'photos' => [
-                    asset('Images/ampli-final2.png'),
-                    asset('Images/ampli-final2.png'),
-                    asset('Images/ampli-final2.png'),
-                ]
-            ],
-        ];
+        $this->loadAlbums();
     }
 
-    public function getSelectedAlbum()
+    protected function loadAlbums()
     {
-        return $this->albumId ? $this->getAlbums()[$this->albumId] : null;
-    }
-
-    public function selectAlbum($albumId)
-    {
-        $this->albumId = $albumId;
-    }
-
-    public function deselectAlbum()
-    {
-        $this->albumId = null;
-    }
-
-    public function selectPhoto($photoUrl)
-    {
-        $this->selectedPhoto = urldecode($photoUrl);
-
-    }
-
-    public function closePhoto()
-    {
-        $this->selectedPhoto = null;
+        $this->albums = Album::with(['files' => function($query) {
+            $query->latest();
+        }])->get()->map(function ($album) {
+            return [
+                'id' => $album->id,
+                'title' => $album->title,
+                'cover' => $album->cover_url,
+                'date' => $album->created_at->format('d M Y'),
+                'photos_count' => $album->files->count()
+            ];
+        })->toArray();
     }
 
     public function render()
     {
         return view('livewire.fotografias', [
-            'albums' => $this->getAlbums(),
-            'selectedAlbum' => $this->getSelectedAlbum()
+            'albums' => $this->albums
         ]);
     }
 }
