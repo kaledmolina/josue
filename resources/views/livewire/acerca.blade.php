@@ -21,11 +21,11 @@
             <div class="w-full lg:w-2/3 text-center lg:text-left">
                 <h1 class="text-5xl font-begum mb-6">
                     <span class="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
-                    Cineasta y creador
+                        {{ $content->hero_title }}
                     </span>
                 </h1>
                 <p class="text-xl text-white/80 mb-6 bg-white/5 p-6 rounded-xl backdrop-blur-sm border border-white/10">
-                    💻 Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo cinematográfico único que refleja su visión auténtica del mundo.
+                    {{ $content->hero_description }}
                 </p>
             </div>
         </div>
@@ -40,9 +40,9 @@
                     </h2>
                     <div class="space-y-4">
                         <div class="border-l-4 border-cyan-400 pl-4 hover:bg-white/10 transition-colors p-3 rounded">
-                            <h3 class="text-xl font-semibold text-white">Ingeniería en Sistemas</h3>
-                            <p class="text-white/80">Universidad XYZ (2020-2024)</p>
-                            <p class="text-white/60 mt-2">Desarrollo de software, arquitectura de sistemas y gestión de proyectos</p>
+                            <h3 class="text-xl font-semibold text-white">{{ $content->education_title }}</h3>
+                            <p class="text-white/80">{{ $content->education_institution }} ({{ $content->education_dates }})</p>
+                            <p class="text-white/60 mt-2">{{ $content->education_details }}</p>
                         </div>
                     </div>
                 </div>
@@ -56,12 +56,13 @@
                     </h2>
                     <div class="space-y-4">
                         <div class="border-l-4 border-blue-400 pl-4 hover:bg-white/10 transition-colors p-3 rounded">
-                            <h3 class="text-xl font-semibold text-white">Desarrollador Full Stack</h3>
-                            <p class="text-white/80">Empresa ABC (2022-Actualidad)</p>
-                            <p class="text-white/60 mt-2">Desarrollo de aplicaciones web con Laravel y Vue.js</p>
+                            <h3 class="text-xl font-semibold text-white">{{ $content->experience_title }}</h3>
+                            <p class="text-white/80">{{ $content->experience_company }} ({{ $content->experience_dates }})</p>
+                            <p class="text-white/60 mt-2">{{ $content->experience_details }}</p>
                             <div class="mt-2 flex gap-2">
-                                <div class="badge bg-blue-400 text-white">Laravel</div>
-                                <div class="badge bg-cyan-400 text-white">Vue.js</div>
+                                @foreach($content->skills ?? [] as $skill)
+                                    <div class="badge bg-blue-400 text-white">{{ $skill }}</div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
