@@ -60,6 +60,7 @@ class AboutContentResource extends Resource
                         Forms\Components\Textarea::make('education_details')
                             ->label('Detalles académicos')
                             ->rows(3)
+                            ->required()
                             ->columnSpanFull(),
                     ]),
                 
@@ -82,6 +83,7 @@ class AboutContentResource extends Resource
                         Forms\Components\Textarea::make('experience_details')
                             ->label('Responsabilidades')
                             ->rows(3)
+                            ->required()
                             ->columnSpanFull(),
                         
                         Forms\Components\TagsInput::make('skills')
