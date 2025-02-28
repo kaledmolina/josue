@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="color-body">
+<body class="color-body flex flex-col min-h-screen">
     <!-- Navbar -->
     <nav id="navbar" class="navbar font-begum fixed transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg bg-gray-800/50">
     <div class="navbar-start">
