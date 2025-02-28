@@ -11,7 +11,7 @@
 </head>
 <body class="color-body">
     <!-- Navbar -->
-    <nav id="navbar" class="navbar font-begum fixed top-4 transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg">
+    <nav id="navbar" class="navbar font-begum fixed transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg">
         <div class="navbar-start">
             <a class="btn btn-ghost text-xl" wire:navigate href="/">
                 <img src="{{ asset('Images/marcaX.png') }}" alt="Logo" width="40" class="d-inline-block align-text-top">
