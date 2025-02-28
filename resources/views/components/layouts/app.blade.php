@@ -11,20 +11,38 @@
 </head>
 <body class="color-body">
     <!-- Navbar -->
-    <nav id="navbar" class="navbar font-begum fixed transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg">
-        <div class="navbar-start">
-            <a class="btn btn-ghost text-xl" wire:navigate href="/">
-                <img src="{{ asset('Images/marcaX.png') }}" alt="Logo" width="40" class="d-inline-block align-text-top">
-                Josue Molina
-            </a>
+    <nav id="navbar" class="navbar font-begum fixed transition-all duration-500 ease-in-out bg-opacity-50 backdrop-blur-md text-white z-50 shadow-lg bg-gray-800/50">
+    <div class="navbar-start">
+        <!-- Menú móvil -->
+        <div class="dropdown lg:hidden">
+            <label tabindex="0" class="btn btn-ghost btn-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </label>
+            <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 z-[1] p-2 shadow bg-gray-800 rounded-box w-52">
+                <li><a wire:navigate href="/">Inicio</a></li>
+                <li><a href="/proyectos">Proyectos</a></li>
+                <li><a href="/contacto">Contacto</a></li>
+                <li><a href="/acerca">Acerca</a></li>
+            </ul>
         </div>
-        <div class="navbar-end">
-            <a class="btn btn-ghost text-lg" wire:navigate href="/">Inicio</a>
-            <a class="btn btn-ghost text-lg"  href="/proyectos">Proyectos</a>
-            <a class="btn btn-ghost text-lg"  href="/contacto">Contacto</a>
-            <a class="btn btn-ghost text-lg"  href="/acerca">Acerca</a>
-        </div>
-    </nav>
+        
+        <!-- Logo - Visible siempre -->
+        <a class="btn btn-ghost text-xl" wire:navigate href="/">
+            <img src="{{ asset('Images/marcaX.png') }}" alt="Logo" width="40" class="d-inline-block align-text-top">
+            Josue Molina
+        </a>
+    </div>
+
+    <!-- Menú desktop - Oculto en móviles -->
+    <div class="navbar-end hidden lg:flex">
+        <a class="btn btn-ghost text-lg" wire:navigate href="/">Inicio</a>
+        <a class="btn btn-ghost text-lg" href="/proyectos">Proyectos</a>
+        <a class="btn btn-ghost text-lg" href="/contacto">Contacto</a>
+        <a class="btn btn-ghost text-lg" href="/acerca">Acerca</a>
+    </div>
+</nav>
 
     <!-- Contenido principal -->
     <main {{ $attributes->merge(['class' => 'min-h-screen']) }}>
