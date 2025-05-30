@@ -12,6 +12,13 @@ use Google\Service\Drive;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+    public function register()
+    {
+        $this->app->singleton(SocialMediaService::class, function ($app) {
+            return new SocialMediaService();
+        });
+    }
     public function boot()
     {
         Storage::extend('google', function ($app, $config) {
