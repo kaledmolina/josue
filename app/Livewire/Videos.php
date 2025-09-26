@@ -21,7 +21,7 @@ class Videos extends Component
 
     public function render()
     {
-        $videos = Video::paginate($this->perPage);
+        $videos = Video::latest()->paginate($this->perPage);
         return view('livewire.videos', ['videos' => $videos]);
     }
 }
