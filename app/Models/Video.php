@@ -8,19 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Video extends Model
 {
     use HasFactory;
+    
+    protected $appends = ['embed_html', 'is_vertical'];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = ['source', 'embed_html', 'is_vertical'];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'title',
         'url',
@@ -28,93 +18,111 @@ class Video extends Model
         'alignment',
     ];
 
-    /**
-     * Detecta la plataforma del video basado en la URL.
-     *
-     * @return string
-     */
-    public function getSourceAttribute(): string
-    {
-        $url = $this->url;
-        if (str_contains($url, 'youtube.com') || str_contains($url, 'youtu.be')) {
-            return 'youtube';
-        }
-        if (str_contains($url, 'vimeo.com')) {
-            return 'vimeo';
-        }
-        if (str_contains($url, 'instagram.com')) {
-            return 'instagram';
-        }
-        return 'unknown';
-    }
-
-    /**
-     * Determina si el video tiene un formato vertical (como un Short o Reel).
-     *
-     * @return bool
-     */
     public function getIsVerticalAttribute(): bool
     {
-        if ($this->source === 'instagram') {
-            return true;
-        }
-
-        if ($this->source === 'youtube' && str_contains($this->url, '/shorts/')) {
-            return true;
-        }
-
-        return false;
+        $url = $this->url;
+        return str_contains($url, 'instagram.com/p/') ||
+               str_contains($url, 'instagram.com/reel/') ||
+               str_contains($url, 'youtube.com/shorts/') ||
+               str_contains($url, 'tiktok.com');
     }
 
-
-    /**
-     * Genera el código HTML para incrustar el video según la plataforma.
-     *
-     * @return string
-     */
     public function getEmbedHtmlAttribute(): string
     {
-        switch ($this->source) {
-            case 'youtube':
-                return $this->generateYoutubeEmbed();
-            case 'vimeo':
-                return $this->generateVimeoEmbed();
-            case 'instagram':
-                return $this->generateInstagramEmbed();
-            default:
-                return '<div class="w-full h-full bg-black/50 flex items-center justify-center text-white rounded-lg"><p>Video no soportado.</p></div>';
+        $url = $this->url;
+
+        // --- Instagram ---
+        if (str_contains($url, 'instagram.com')) {
+            $cleanUrl = rtrim($url, '/') . '/';
+            
+            // Embed minimalista de Instagram - solo video
+            return '<blockquote class="instagram-media" 
+                        data-instgrm-permalink="' . $cleanUrl . '" 
+                        data-instgrm-version="14"
+                        data-instgrm-captioned
+                        style="
+                            background: transparent;
+                            border: 0;
+                            margin: 0;
+                            padding: 0;
+                            width: 100%;
+                            max-width: 100%;
+                        "></blockquote>';
         }
-    }
 
-    private function generateYoutubeEmbed(): string
-    {
-        // Regex mejorada para capturar IDs de videos normales, shorts y embeds.
-        preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/', $this->url, $matches);
-        $videoId = $matches[1] ?? null;
-
-        if (!$videoId) {
-            return '<div class="w-full h-full bg-black/50 flex items-center justify-center text-white rounded-lg p-4 text-center"><p>ID de video de YouTube inválido. Verifique la URL.</p></div>';
+        // --- YouTube & Shorts ---
+        if (str_contains($url, 'youtu.be/') || str_contains($url, 'youtube.com/')) {
+            $videoId = $this->extractYoutubeId($url);
+            
+            if ($videoId) {
+                $embedUrl = 'https://www.youtube.com/embed/' . $videoId;
+                
+                $params = http_build_query([
+                    'autoplay' => 0,
+                    'modestbranding' => 1,
+                    'rel' => 0,
+                    'showinfo' => 0,
+                ]);
+                
+                return sprintf(
+                    '<iframe src="%s?%s" class="w-full h-full rounded-lg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+                    $embedUrl,
+                    $params
+                );
+            }
         }
         
-        $embedUrl = 'https://www.youtube.com/embed/' . $videoId;
-        return '<iframe class="w-full h-full rounded-lg shadow-xl" src="' . $embedUrl . '" title="' . $this->title . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        // --- Vimeo ---
+        if (str_contains($url, 'vimeo.com')) {
+            $videoId = last(explode('/', parse_url($url, PHP_URL_PATH)));
+            
+            if ($videoId) {
+                return sprintf(
+                    '<iframe src="https://player.vimeo.com/video/%s?title=0&byline=0&portrait=0" class="w-full h-full rounded-lg" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
+                    $videoId
+                );
+            }
+        }
+
+        // --- TikTok ---
+        if (str_contains($url, 'tiktok.com')) {
+            preg_match('/video\/(\d+)/', $url, $matches);
+            $videoId = $matches[1] ?? null;
+            
+            if ($videoId) {
+                return sprintf(
+                    '<blockquote class="tiktok-embed" cite="%s" data-video-id="%s" style="max-width: 605px; min-width: 325px; margin: 0 auto;"><section></section></blockquote><script async src="https://www.tiktok.com/embed.js"></script>',
+                    $url,
+                    $videoId
+                );
+            }
+        }
+
+        return '<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-lg p-8"><p class="text-center">⚠️ No se pudo cargar el video<br><span class="text-sm text-gray-400 mt-2 block">URL no soportada</span></p></div>';
     }
 
-    private function generateVimeoEmbed(): string
+    /**
+     * Extrae el ID de video de diferentes formatos de URL de YouTube
+     */
+    private function extractYoutubeId(string $url): ?string
     {
-        preg_match('/vimeo\.com\/(?:video\/)?(\d+)/', $this->url, $matches);
-        $videoId = $matches[1] ?? null;
-
-        if (!$videoId) return '<p>ID de video de Vimeo inválido.</p>';
-
-        $embedUrl = 'https://player.vimeo.com/video/' . $videoId;
-        return '<iframe class="w-full h-full rounded-lg shadow-xl" src="' . $embedUrl . '" title="' . $this->title . '" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
-    }
-
-    private function generateInstagramEmbed(): string
-    {
-        // Instagram requiere un script y un blockquote, por lo que devolvemos todo el HTML.
-        // La URL debe ser del tipo: https://www.instagram.com/p/C3XYZ123abc/
-        return '<iframe class="w-full h-full rounded-lg" src="' . rtrim($this->url, '/') . '/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>';
+        if (str_contains($url, 'youtube.com/shorts/')) {
+            return last(explode('/shorts/', explode('?', $url)[0]));
+        }
+        
+        $patterns = [
+            '/youtube\.com\/watch\?v=([^&]+)/',
+            '/youtube\.com\/embed\/([^?]+)/',
+            '/youtu\.be\/([^?]+)/',
+            '/youtube\.com\/v\/([^?]+)/',
+        ];
+        
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $url, $matches)) {
+                return $matches[1];
+            }
+        }
+        
+        return null;
     }
 }
