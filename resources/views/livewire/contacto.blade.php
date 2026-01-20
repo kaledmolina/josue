@@ -105,18 +105,18 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="group">
                                 <label
-                                    class="block text-sm font-medium text-gray-400 mb-2 ml-1 group-focus-within:text-cyan-400 transition-colors">Nombre</label>
+                                    class="block text-sm font-medium text-gray-400 mb-2 ml-1 group-focus-within:text-white transition-colors">Nombre</label>
                                 <input type="text" wire:model="name"
-                                    class="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 outline-none text-white placeholder-white/30 transition-all"
+                                    class="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-white focus:ring-1 focus:ring-white/50 outline-none text-white placeholder-white/30 transition-all"
                                     placeholder="Tu nombre">
                                 @error('name')<span
                                 class="text-red-400 text-sm block mt-1 ml-1">{{ $message }}</span>@enderror
                             </div>
                             <div class="group">
                                 <label
-                                    class="block text-sm font-medium text-gray-400 mb-2 ml-1 group-focus-within:text-cyan-400 transition-colors">Email</label>
+                                    class="block text-sm font-medium text-gray-400 mb-2 ml-1 group-focus-within:text-white transition-colors">Email</label>
                                 <input type="email" wire:model="email"
-                                    class="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 outline-none text-white placeholder-white/30 transition-all"
+                                    class="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-white focus:ring-1 focus:ring-white/50 outline-none text-white placeholder-white/30 transition-all"
                                     placeholder="tucorreo@ejemplo.com">
                                 @error('email')<span
                                 class="text-red-400 text-sm block mt-1 ml-1">{{ $message }}</span>@enderror
@@ -125,19 +125,19 @@
 
                         <div class="group">
                             <label
-                                class="block text-sm font-medium text-gray-400 mb-2 ml-1 group-focus-within:text-cyan-400 transition-colors">Mensaje</label>
+                                class="block text-sm font-medium text-gray-400 mb-2 ml-1 group-focus-within:text-white transition-colors">Mensaje</label>
                             <textarea rows="4" wire:model="message"
-                                class="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 outline-none text-white placeholder-white/30 transition-all resize-none"
+                                class="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-white focus:ring-1 focus:ring-white/50 outline-none text-white placeholder-white/30 transition-all resize-none"
                                 placeholder="Cuéntame sobre tu proyecto..."></textarea>
                             @error('message')<span
                             class="text-red-400 text-sm block mt-1 ml-1">{{ $message }}</span>@enderror
                         </div>
 
                         <button type="submit" wire:loading.attr="disabled"
-                            class="w-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-500/25 disabled:opacity-70 disabled:cursor-not-allowed">
+                            class="w-full bg-white text-black font-bold py-4 px-8 rounded-full hover:bg-gray-200 transition-all duration-300 transform hover:scale-[1.02] shadow-lg disabled:opacity-70 disabled:cursor-not-allowed">
                             <span wire:loading.remove wire:target="submit">Enviar Mensaje</span>
                             <span wire:loading wire:target="submit" class="flex items-center justify-center gap-2">
-                                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg"
+                                <svg class="animate-spin h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                         stroke-width="4"></circle>
