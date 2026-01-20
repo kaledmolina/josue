@@ -41,10 +41,28 @@ class TestGoogleDriveConnection extends Command
         );
 
         try {
-            $this->info('Attempting to list files from Google Drive...');
+            // Test 1: Check Auth
+            $this->info('Step 1: Testing Authentication (Fetching Access Token)...');
+            $client = new \Google\Client();
+            $client->setClientId($config['clientId']);
+            $client->setClientSecret($config['clientSecret']);
+            $client->refreshToken($config['refreshToken']);
 
-            // Try to list the contents of the configured folder
-            $files = Storage::disk('google')->files(); // This lists files in the root of the 'google' disk (which is already mapped to folder ID)
+            $token = $client->fetchAccessTokenWithRefreshToken($config['refreshToken']);
+
+            if (isset($token['error'])) {
+                $this->error('Authentication Failed: ' . json_encode($token));
+                $this->line('Hint: Your Refresh Token might be expired or invalid.');
+                return;
+            }
+
+            $this->success('Authentication Successful! Access Token generated.');
+
+            // Test 2: List Files
+            $this->info('Step 2: Listing Files from Folder: ' . ($config['folder'] ?? 'N/A'));
+
+            // Re-use standard storage to test the full integration
+            $files = Storage::disk('google')->files();
 
             if (empty($files)) {
                 $this->warn('Connection successful, but no files were found in the configured folder.');
@@ -65,10 +83,7 @@ class TestGoogleDriveConnection extends Command
             $this->error('Error Message: ' . $e->getMessage());
 
             if (str_contains($e->getMessage(), '404')) {
-                $this->line('Hint: A 404 error often means the Folder ID is incorrect or the account doesnt have permission to access it.');
-            }
-            if (str_contains($e->getMessage(), 'invalid_grant')) {
-                $this->line('Hint: invalid_grant usually means the Refresh Token is invalid, expired, or revoked.');
+                $this->line('Hint: A 404 error often means the Folder ID is incorrect ("apidrive" is NOT a valid ID).');
             }
         }
     }
