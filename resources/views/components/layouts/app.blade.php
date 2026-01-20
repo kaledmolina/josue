@@ -54,11 +54,15 @@
         </div>
 
         <!-- Menú desktop - Oculto en móviles -->
-        <div class="navbar-end hidden lg:flex">
-            <a class="btn btn-ghost text-lg" wire:navigate href="/">Inicio</a>
-            <a class="btn btn-ghost text-lg" href="/proyectos">Proyectos</a>
-            <a class="btn btn-ghost text-lg" href="/contacto">Contacto</a>
-            <a class="btn btn-ghost text-lg" href="/acerca">Acerca</a>
+        <div class="navbar-end hidden lg:flex gap-2">
+            <a class="btn btn-ghost text-lg rounded-full hover:bg-white/10 hover:border-white/50 border border-transparent transition-all duration-300"
+                wire:navigate href="/">Inicio</a>
+            <a class="btn btn-ghost text-lg rounded-full hover:bg-white/10 hover:border-white/50 border border-transparent transition-all duration-300"
+                href="/proyectos">Proyectos</a>
+            <a class="btn btn-ghost text-lg rounded-full hover:bg-white/10 hover:border-white/50 border border-transparent transition-all duration-300"
+                href="/contacto">Contacto</a>
+            <a class="btn btn-ghost text-lg rounded-full hover:bg-white/10 hover:border-white/50 border border-transparent transition-all duration-300"
+                href="/acerca">Acerca</a>
         </div>
     </nav>
 

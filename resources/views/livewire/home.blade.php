@@ -26,15 +26,14 @@
             </div>
         </div>
 
-        <!-- Texto responsive mejorado -->
         <div class="absolute bottom-0 w-full px-4 pb-8 
-                sm:px-6 sm:pb-10 md:w-auto md:absolute md:bottom-20 md:left-10
-                lg:ml-16 lg:mb-16 transition-all duration-300 z-20">
-            <div data-aos="fade-up" data-aos-delay="200" class="bg-black/40 backdrop-blur-xl border border-white/10
-                    rounded-2xl shadow-2xl p-6 md:p-8
-                    sm:max-w-md md:max-w-lg lg:max-w-xl
+                sm:px-6 sm:pb-10 md:w-auto md:absolute md:bottom-24 md:left-12
+                lg:ml-20 lg:mb-20 transition-all duration-300 z-20">
+            <div data-aos="fade-up" data-aos-delay="200" class="bg-black/60 backdrop-blur-xl border border-white/10
+                    rounded-3xl shadow-2xl p-6
+                    max-w-sm md:max-w-md
                     mx-auto md:mx-0 text-center md:text-left
-                    transform transition-all duration-300 hover:bg-black/50 group">
+                    transform transition-all duration-300 hover:bg-black/70 group">
 
                 <h1 class="text-white text-3xl md:text-5xl font-bold font-begum mb-4 leading-tight">
                     Vision <span
