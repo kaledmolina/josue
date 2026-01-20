@@ -27,9 +27,9 @@
         </div>
 
         <!-- Texto responsive mejorado -->
-        <div class="absolute bottom-0 right-0 w-full px-4 pb-8 
-                sm:px-6 sm:pb-10 md:w-auto md:static md:absolute md:bottom-20 md:right-10
-                lg:mr-16 lg:mb-16 transition-all duration-300 z-20">
+        <div class="absolute bottom-0 w-full px-4 pb-8 
+                sm:px-6 sm:pb-10 md:w-auto md:absolute md:bottom-20 md:left-10
+                lg:ml-16 lg:mb-16 transition-all duration-300 z-20">
             <div data-aos="fade-up" data-aos-delay="200" class="bg-black/40 backdrop-blur-xl border border-white/10
                     rounded-2xl shadow-2xl p-6 md:p-8
                     sm:max-w-md md:max-w-lg lg:max-w-xl
