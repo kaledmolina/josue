@@ -7,19 +7,18 @@
     <div class="w-full max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
         <div data-aos="fade-down" class="text-center mb-12">
             <h2 id="proyectos" class="text-3xl md:text-4xl font-bold text-white font-begum mb-2">
-                Mis <span
-                    class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">Proyectos</span>
+                Mis Proyectos
             </h2>
-            <div class="w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
+            <div class="w-16 h-1 bg-white/20 mx-auto rounded-full"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 w-full">
             <!-- Tarjeta Fotografía -->
             <a href="/fotografias" wire:navigate data-aos="fade-right" data-aos-delay="100"
-                class="group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-blue-500/20">
+                class="group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-white/10">
 
                 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                    style="background-image: url('{{ asset('Images/fotos.jpg') }}');">
+                    style="background-image: url('{{ asset('Images/fotos.jpg') }}'); filter: grayscale(100%) brightness(80%);">
                 </div>
                 <!-- Overlay oscuro similar a la card del hero -->
                 <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40"></div>
@@ -28,7 +27,7 @@
                 <div
                     class="absolute bottom-6 left-6 right-6 p-5 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
                     <span
-                        class="inline-block px-3 py-0.5 mb-2 text-[10px] font-bold tracking-wider text-blue-300 uppercase bg-blue-500/20 rounded-full border border-blue-500/30">
+                        class="inline-block px-3 py-0.5 mb-2 text-[10px] font-bold tracking-wider text-white uppercase bg-white/10 rounded-full border border-white/20">
                         Galería
                     </span>
                     <h3 class="text-2xl font-bold text-white mb-2 font-begum">Fotografía</h3>
@@ -45,10 +44,10 @@
 
             <!-- Tarjeta Videos -->
             <a href="/videos" wire:navigate data-aos="fade-left" data-aos-delay="200"
-                class="group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-purple-500/20">
+                class="group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-white/10">
 
                 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                    style="background-image: url('{{ asset('Images/pal-videos3.png') }}');">
+                    style="background-image: url('{{ asset('Images/pal-videos3.png') }}'); filter: grayscale(100%) brightness(80%);">
                 </div>
                 <!-- Overlay oscuro -->
                 <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40"></div>
@@ -57,7 +56,7 @@
                 <div
                     class="absolute bottom-6 left-6 right-6 p-5 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
                     <span
-                        class="inline-block px-3 py-0.5 mb-2 text-[10px] font-bold tracking-wider text-purple-300 uppercase bg-purple-500/20 rounded-full border border-purple-500/30">
+                        class="inline-block px-3 py-0.5 mb-2 text-[10px] font-bold tracking-wider text-white uppercase bg-white/10 rounded-full border border-white/20">
                         Producción
                     </span>
                     <h3 class="text-2xl font-bold text-white mb-2 font-begum">Videos</h3>

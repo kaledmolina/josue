@@ -55,8 +55,7 @@
                 @foreach($stats as $stat)
                     <div
                         class="bg-white/5 p-6 rounded-3xl backdrop-blur-md border border-white/10 shadow-xl hover:border-white/20 transition-all duration-300 hover:transform hover:-translate-y-1">
-                        <h2
-                            class="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-3 text-white">
                             {{ $stat->value }}
                         </h2>
                         <p class="text-lg text-white/90 font-medium tracking-wide">{{ $stat->description }}</p>

@@ -36,8 +36,7 @@
                     transform transition-all duration-300 hover:bg-black/70 group">
 
                 <h1 class="text-white text-2xl md:text-4xl font-bold font-begum mb-3 leading-tight">
-                    Vision <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Cinematográfica</span>
+                    Vision Cinematográfica
                 </h1>
 
                 <p class="text-gray-300 text-sm md:text-base 

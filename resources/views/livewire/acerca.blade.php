@@ -22,8 +22,7 @@
             <!-- Texto presentación -->
             <div data-aos="fade-left" class="w-full lg:w-2/3 text-center lg:text-left">
                 <h1 class="text-4xl md:text-5xl font-bold font-begum mb-6 leading-tight">
-                    <span
-                        class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+                    <span class="text-white">
                         {{ $content->hero_title }}
                     </span>
                 </h1>
@@ -49,7 +48,8 @@
                             class="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-blue-500 border-2 border-gray-900"></span>
                         <h3 class="text-lg font-semibold text-white">{{ $content->education_title }}</h3>
                         <p class="text-blue-300 text-sm mb-2">{{ $content->education_institution }} |
-                            {{ $content->education_dates }}</p>
+                            {{ $content->education_dates }}
+                        </p>
                         <p class="text-gray-400 text-sm leading-relaxed">{{ $content->education_details }}</p>
                     </div>
                 </div>
@@ -67,7 +67,8 @@
                             class="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-purple-500 border-2 border-gray-900"></span>
                         <h3 class="text-lg font-semibold text-white">{{ $content->experience_title }}</h3>
                         <p class="text-purple-300 text-sm mb-2">{{ $content->experience_company }} |
-                            {{ $content->experience_dates }}</p>
+                            {{ $content->experience_dates }}
+                        </p>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">{{ $content->experience_details }}</p>
                     </div>
                 </div>
@@ -78,7 +79,7 @@
         <div data-aos="fade-up"
             class="mt-12 bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 lg:p-10">
             <h2 class="text-3xl font-begum text-white mb-8 text-center md:text-left">
-                Habilidades <span class="text-blue-400">Profesionales</span>
+                Habilidades <span class="text-gray-400">Profesionales</span>
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -97,9 +98,7 @@
                 @foreach($customSkills as $skill)
                     <div
                         class="bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 rounded-xl p-4 transition-all duration-300 flex items-center gap-3 group">
-                        <div
-                            class="w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 group-hover:scale-150 transition-transform">
-                        </div>
+                        <div class="w-2 h-2 rounded-full bg-white group-hover:scale-150 transition-transform"></div>
                         <span class="text-gray-200 font-medium text-sm group-hover:text-white">{{ $skill }}</span>
                     </div>
                 @endforeach
