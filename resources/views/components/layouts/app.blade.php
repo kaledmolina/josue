@@ -28,55 +28,73 @@
         document.addEventListener('livewire:navigated', initAOS);
     </script>
     <!-- Navbar -->
+    <!-- Navbar -->
     <nav id="navbar"
-        class="navbar font-begum fixed top-0 w-full z-50 transition-all duration-300 bg-black/80 backdrop-blur-xl border-b border-white/5 py-4">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="navbar-start w-auto">
-                <!-- Logo -->
-                <a class="btn btn-ghost text-xl px-2 hover:bg-white/5" wire:navigate href="/">
-                    <img src="{{ asset('Images/marcaX.png') }}" alt="Logo" width="32" class="opacity-90">
-                    <span class="ml-2 tracking-wide text-white">Josue Molina</span>
+        class="navbar font-begum fixed top-0 w-full z-50 transition-all duration-300 bg-black/60 backdrop-blur-md border-b border-white/5 py-4">
+        <div class="container mx-auto px-4 md:px-8 flex items-center justify-between">
+            <!-- Logo area -->
+            <div class="flex-shrink-0">
+                <a class="group flex items-center gap-3 px-2 py-1 rounded-lg transition-all hover:bg-white/5"
+                    wire:navigate href="/">
+                    <img src="{{ asset('Images/marcaX.png') }}" alt="Logo"
+                        class="h-8 w-auto opacity-90 transition-transform group-hover:scale-110 duration-500">
+                    <span
+                        class="text-xl tracking-wide text-white font-medium group-hover:tracking-widest transition-all duration-500">Josue
+                        Molina</span>
                 </a>
             </div>
 
-            <!-- Menú desktop - Centrado para balance -->
-            <div class="navbar-center hidden lg:flex">
-                <ul class="menu menu-horizontal px-1 gap-1">
+            <!-- Desktop Menu (Right Aligned) -->
+            <div class="hidden lg:flex items-center gap-1">
+                <ul class="flex items-center gap-1">
                     <li>
                         <a href="/" wire:navigate
-                            class="rounded-full px-6 py-2 transition-all duration-300 {{ request()->routeIs('home') ? 'bg-white text-black font-bold' : 'text-gray-400 hover:text-white hover:bg-white/10' }}">
+                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->routeIs('home') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
                             Inicio
                         </a>
                     </li>
                     <li>
                         <a href="/proyectos"
-                            class="rounded-full px-6 py-2 transition-all duration-300 {{ request()->is('proyectos*') ? 'bg-white text-black font-bold' : 'text-gray-400 hover:text-white hover:bg-white/10' }}">
+                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->is('proyectos*') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
                             Proyectos
                         </a>
                     </li>
                     <li>
                         <a href="/fotografias"
-                            class="rounded-full px-6 py-2 transition-all duration-300 {{ request()->is('fotografias*') || request()->is('album*') ? 'bg-white text-black font-bold' : 'text-gray-400 hover:text-white hover:bg-white/10' }}">
+                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->is('fotografias*') || request()->is('album*') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
                             Fotografía
                         </a>
                     </li>
                     <li>
                         <a href="/acerca"
-                            class="rounded-full px-6 py-2 transition-all duration-300 {{ request()->is('acerca*') ? 'bg-white text-black font-bold' : 'text-gray-400 hover:text-white hover:bg-white/10' }}">
+                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->is('acerca*') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
                             Acerca
                         </a>
                     </li>
                     <li>
                         <a href="/contacto"
-                            class="rounded-full px-6 py-2 transition-all duration-300 {{ request()->is('contacto*') ? 'bg-white text-black font-bold' : 'text-gray-400 hover:text-white hover:bg-white/10' }}">
+                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->is('contacto*') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
                             Contacto
                         </a>
                     </li>
                 </ul>
+
+                <!-- Separator -->
+                <div class="h-6 w-px bg-white/10 mx-3"></div>
+
+                <!-- Extra Action / Social -->
+                <a href="/contacto"
+                    class="btn btn-sm btn-circle btn-ghost text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </a>
             </div>
 
+            <!-- Mobile Menu Button -->
             <div class="navbar-end w-auto lg:hidden">
-                <!-- Mobile Menu Button -->
                 <div class="dropdown dropdown-end">
                     <label tabindex="0" class="btn btn-ghost btn-circle text-white hover:bg-white/10">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -104,18 +122,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-
-            <!-- Spacer for desktop symmetry if needed, or social icons -->
-            <div class="navbar-end hidden lg:flex w-auto">
-                <a href="/contacto"
-                    class="btn btn-sm btn-circle btn-ghost text-white/50 hover:text-white hover:bg-white/10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                </a>
             </div>
         </div>
     </nav>
