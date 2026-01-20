@@ -18,7 +18,7 @@
                 class="group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-white/10">
 
                 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                    style="background-image: url('{{ asset('Images/fotos.jpg') }}'); filter: grayscale(100%) brightness(80%);">
+                    style="background-image: url('{{ asset('Images/fotos.jpg') }}');">
                 </div>
                 <!-- Overlay oscuro similar a la card del hero -->
                 <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40"></div>
@@ -47,7 +47,7 @@
                 class="group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-white/10">
 
                 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                    style="background-image: url('{{ asset('Images/pal-videos3.png') }}'); filter: grayscale(100%) brightness(80%);">
+                    style="background-image: url('{{ asset('Images/pal-videos3.png') }}');">
                 </div>
                 <!-- Overlay oscuro -->
                 <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40"></div>
