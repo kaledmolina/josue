@@ -54,14 +54,14 @@
                 <!-- Grid de estadísticas -->
                 @foreach($stats as $stat)
                     <div
-                        class="bg-white/5 p-8 rounded-3xl backdrop-blur-md border border-white/10 shadow-2xl hover:border-white/20 transition-all duration-300 hover:transform hover:-translate-y-1">
+                        class="bg-white/5 p-6 rounded-3xl backdrop-blur-md border border-white/10 shadow-xl hover:border-white/20 transition-all duration-300 hover:transform hover:-translate-y-1">
                         <h2
-                            class="text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+                            class="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
                             {{ $stat->value }}
                         </h2>
-                        <p class="text-xl text-white/90 font-medium tracking-wide">{{ $stat->description }}</p>
+                        <p class="text-lg text-white/90 font-medium tracking-wide">{{ $stat->description }}</p>
                         @if($stat->updated_at)
-                            <p class="text-xs text-white/40 mt-4 font-mono">Act: {{ $stat->updated_at->format('d/m H:i') }}</p>
+                            <p class="text-[10px] text-white/40 mt-3 font-mono">Act: {{ $stat->updated_at->format('d/m H:i') }}</p>
                         @endif
                     </div>
                 @endforeach
@@ -72,25 +72,25 @@
         <div id="contacto" class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mx-auto">
             <!-- Descripción -->
             <div data-aos="fade-right"
-                class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10 shadow-2xl flex items-center">
+                class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-10 border border-white/10 shadow-2xl flex items-center">
                 <div
-                    class="text-lg md:text-xl text-white/90 leading-relaxed text-center md:text-left font-begum space-y-6">
+                    class="text-base md:text-lg text-white/90 leading-relaxed text-center md:text-left font-begum space-y-4">
                     @if($contactDescription)
                         {!! $contactDescription !!}
                     @else
-                        <h3 class="text-3xl font-bold mb-6 text-white">¿Listo para crear algo increíble?</h3>
-                        <p>Ya sea que tengas una historia que contar, una marca que elevar o un momento que capturar, estoy
-                            aquí para hacerlo realidad.</p>
-                        <p>Contáctame y comencemos a darle vida a tu visión.</p>
+                        <h3 class="text-2xl font-bold mb-4 text-white">¿Listo para crear algo increíble?</h3>
+                        <p class="font-light">Ya sea que tengas una historia que contar, una marca que elevar o un momento
+                            que capturar, estoy aquí para hacerlo realidad.</p>
+                        <p class="font-light">Contáctame y comencemos a darle vida a tu visión.</p>
                     @endif
                 </div>
             </div>
 
             <!-- Formulario de contacto -->
             <div data-aos="fade-left"
-                class="bg-black/40 backdrop-blur-2xl rounded-3xl p-8 lg:p-12 shadow-2xl border border-white/10">
+                class="bg-black/40 backdrop-blur-2xl rounded-3xl p-8 lg:p-10 shadow-2xl border border-white/10">
                 <div class="w-full">
-                    <h2 class="text-4xl font-bold text-white mb-8 font-begum text-left">Contáctanos</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 font-begum text-left">Contáctanos</h2>
                     <form wire:submit.prevent="submit" class="space-y-6 text-left">
                         @if(session()->has('message'))
                             <div

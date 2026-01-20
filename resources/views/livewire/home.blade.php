@@ -35,25 +35,25 @@
                     mx-auto md:mx-0 text-center md:text-left
                     transform transition-all duration-300 hover:bg-black/70 group">
 
-                <h1 class="text-white text-3xl md:text-5xl font-bold font-begum mb-4 leading-tight">
+                <h1 class="text-white text-2xl md:text-4xl font-bold font-begum mb-3 leading-tight">
                     Vision <span
                         class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Cinematográfica</span>
                 </h1>
 
-                <p class="text-gray-200 text-base sm:text-lg md:text-xl 
-                        leading-relaxed font-light font-sans
+                <p class="text-gray-300 text-sm md:text-base 
+                        leading-relaxed font-light font-sans mb-4
                         group-hover:text-white transition-colors">
                     Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo
                     cinematográfico único que refleja su visión auténtica del mundo.
                 </p>
 
-                <div class="mt-6 flex justify-center md:justify-start gap-4">
+                <div class="mt-4 flex justify-center md:justify-start gap-3">
                     <a href="/proyectos"
-                        class="px-6 py-2 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition-colors">
+                        class="px-5 py-2 text-sm bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition-colors">
                         Ver Trabajo
                     </a>
                     <a href="/contacto"
-                        class="px-6 py-2 border border-white text-white rounded-full font-semibold hover:bg-white/10 transition-colors">
+                        class="px-5 py-2 text-sm border border-white text-white rounded-full font-semibold hover:bg-white/10 transition-colors">
                         Contactar
                     </a>
                 </div>
