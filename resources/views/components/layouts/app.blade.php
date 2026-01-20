@@ -15,14 +15,17 @@
 <body class="color-body flex flex-col min-h-screen">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        const initAOS = () => {
             AOS.init({
                 duration: 1000,
                 once: true,
                 offset: 100,
                 easing: 'ease-out-cubic'
             });
-        });
+        };
+
+        document.addEventListener('DOMContentLoaded', initAOS);
+        document.addEventListener('livewire:navigated', initAOS);
     </script>
     <!-- Navbar -->
     <nav id="navbar"
