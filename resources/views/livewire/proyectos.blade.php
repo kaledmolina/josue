@@ -1,8 +1,8 @@
-<section class="min-h-screen flex flex-col items-center justify-center py-20 bg-gray-900 relative overflow-hidden">
+<section class="min-h-screen flex flex-col items-center justify-center py-20 bg-black relative overflow-hidden">
     <!-- Background Elements -->
-    <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 opacity-50"></div>
-    <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black opacity-40"></div>
+    <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse"></div>
 
     <div class="w-full max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
         <div data-aos="fade-down" class="text-center mb-12">
