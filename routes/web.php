@@ -38,10 +38,12 @@ Route::get('/preview-file/{file}', function ($fileId) {
 
 Route::get('/album/{album}/cover', function (Album $album) {
     try {
-        // CORRECTION: Get the latest file from the album to use as cover
-        $coverFile = $album->files()->latest()->first();
+        // CORRECTION: Get a random file from the album to use as cover
+        $coverFile = $album->files()->inRandomOrder()->first();
 
         if (!$coverFile) {
+            // Fallback: Try to sync files if none exist (Optional, but good for robustness)
+            // For now, just abort or return a placeholder could be better, but lets stick to logic
             abort(404);
         }
 
