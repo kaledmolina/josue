@@ -71,7 +71,7 @@
         <div id="contacto" class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mx-auto">
             <!-- Descripción -->
             <div data-aos="fade-right"
-                class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-10 border border-white/10 shadow-2xl flex items-center">
+                class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-10 transform transition-all duration-300 hover:bg-black/70 group flex items-center">
                 <div
                     class="text-base md:text-lg text-white/90 leading-relaxed text-center md:text-left font-begum space-y-4">
                     @if($contactDescription)
@@ -87,7 +87,7 @@
 
             <!-- Formulario de contacto -->
             <div data-aos="fade-left"
-                class="bg-black/40 backdrop-blur-2xl rounded-3xl p-8 lg:p-10 shadow-2xl border border-white/10">
+                class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-10 transform transition-all duration-300 hover:bg-black/70 group">
                 <div class="w-full">
                     <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 font-begum text-left">Contáctanos</h2>
                     <form wire:submit.prevent="submit" class="space-y-6 text-left">

@@ -26,7 +26,8 @@
                         {{ $content->hero_title }}
                     </span>
                 </h1>
-                <div class="bg-white/5 p-6 md:p-8 rounded-3xl backdrop-blur-md border border-white/10 shadow-2xl">
+                <div
+                    class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:bg-black/70 group">
                     <p class="text-base md:text-lg text-gray-200 leading-relaxed font-light">
                         {{ $content->hero_description }}
                     </p>
@@ -38,7 +39,7 @@
         <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
             <!-- Educación -->
             <div data-aos="fade-up"
-                class="group bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-black/50 transition-colors">
+                class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:bg-black/70 group">
                 <h2 class="text-2xl md:text-3xl font-begum text-white mb-6 flex items-center gap-3">
                     <i class="fas fa-graduation-cap text-blue-400"></i> Formación
                 </h2>
@@ -57,7 +58,7 @@
 
             <!-- Experiencia -->
             <div data-aos="fade-up" data-aos-delay="100"
-                class="group bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-black/50 transition-colors">
+                class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:bg-black/70 group">
                 <h2 class="text-2xl md:text-3xl font-begum text-white mb-6 flex items-center gap-3">
                     <i class="fas fa-briefcase text-purple-400"></i> Experiencia
                 </h2>
@@ -77,7 +78,7 @@
 
         <!-- Habilidades (Skills) -->
         <div data-aos="fade-up"
-            class="mt-12 bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 lg:p-10">
+            class="mt-12 bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-10 transform transition-all duration-300 hover:bg-black/70 group">
             <h2 class="text-3xl font-begum text-white mb-8 text-center md:text-left">
                 Habilidades <span class="text-gray-400">Profesionales</span>
             </h2>
