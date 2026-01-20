@@ -8,6 +8,7 @@ use League\Flysystem\Filesystem;
 use Masbug\Flysystem\GoogleDriveAdapter;
 use Google\Client;
 use Google\Service\Drive;
+use App\Services\SocialMediaService;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -26,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
             $client->setClientId($config['clientId']);
             $client->setClientSecret($config['clientSecret']);
             $client->refreshToken($config['refreshToken']);
-            
+
             $service = new Drive($client);
             $adapter = new GoogleDriveAdapter($service, $config['folder']);
 

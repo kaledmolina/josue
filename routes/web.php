@@ -23,14 +23,15 @@ Route::get('/contacto', Contacto::class);
 Route::get('/acerca', Acerca::class);
 Route::get('/preview-file/{file}', function ($fileId) {
     $file = \App\Models\File::findOrFail($fileId);
-    
+
     try {
         $fileContents = Storage::disk('google')->get($file->path);
-        
+
         return response($fileContents)
             ->header('Content-Type', $file->mime_type)
-            ->header('Content-Disposition', 'inline; filename="'.$file->name.'"');
+            ->header('Content-Disposition', 'inline; filename="' . $file->name . '"');
     } catch (\Exception $e) {
+        \Illuminate\Support\Facades\Log::error('Google Drive Error for file ' . $fileId . ': ' . $e->getMessage());
         abort(404);
     }
 })->name('file.preview');
@@ -38,7 +39,7 @@ Route::get('/preview-file/{file}', function ($fileId) {
 Route::get('/album/{album}/cover', function (Album $album) {
     try {
         $fileContents = Storage::disk($album->disk)->get($album->path);
-        
+
         return response($fileContents)
             ->header('Content-Type', 'image/jpeg') // Ajusta según tu tipo de imagen
             ->header('Content-Disposition', 'inline; filename="cover.jpg"')
