@@ -56,7 +56,8 @@ class TestGoogleDriveConnection extends Command
                 return;
             }
 
-            $this->success('Authentication Successful! Access Token generated.');
+            // CORRECCIÓN: Usamos info() en lugar de success()
+            $this->info('Authentication Successful! Access Token generated.');
 
             // Test 2: List Files
             $this->info('Step 2: Listing Files from Folder: ' . ($config['folder'] ?? 'N/A'));
@@ -67,7 +68,8 @@ class TestGoogleDriveConnection extends Command
             if (empty($files)) {
                 $this->warn('Connection successful, but no files were found in the configured folder.');
             } else {
-                $this->success('Connection successful! Found ' . count($files) . ' files.');
+                // CORRECCIÓN: Usamos info() en lugar de success()
+                $this->info('Connection successful! Found ' . count($files) . ' files.');
 
                 // List first 5 files
                 $headers = ['Filename'];
