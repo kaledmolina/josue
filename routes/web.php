@@ -38,13 +38,21 @@ Route::get('/preview-file/{file}', function ($fileId) {
 
 Route::get('/album/{album}/cover', function (Album $album) {
     try {
-        $fileContents = Storage::disk($album->disk)->get($album->path);
+        // CORRECTION: Get the latest file from the album to use as cover
+        $coverFile = $album->files()->latest()->first();
+
+        if (!$coverFile) {
+            abort(404);
+        }
+
+        $fileContents = Storage::disk($coverFile->disk)->get($coverFile->path);
 
         return response($fileContents)
-            ->header('Content-Type', 'image/jpeg') // Ajusta según tu tipo de imagen
-            ->header('Content-Disposition', 'inline; filename="cover.jpg"')
+            ->header('Content-Type', $coverFile->mime_type)
+            ->header('Content-Disposition', 'inline; filename="' . $coverFile->name . '"')
             ->header('Cache-Control', 'public, max-age=31536000');
     } catch (\Exception $e) {
+        \Illuminate\Support\Facades\Log::error('Album Cover Error: ' . $e->getMessage());
         abort(404);
     }
 })->name('album.cover');
