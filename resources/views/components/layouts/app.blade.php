@@ -12,7 +12,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="color-body flex flex-col min-h-screen">
+<body class="color-body flex flex-col min-h-screen font-dearest">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         const initAOS = () => {
@@ -30,7 +30,7 @@
     <!-- Navbar -->
     <!-- Navbar -->
     <nav id="navbar"
-        class="navbar font-begum fixed top-0 w-full z-50 transition-all duration-300 bg-black/60 backdrop-blur-md border-b border-white/5 py-4">
+        class="navbar font-dearest fixed top-0 w-full z-50 transition-all duration-300 bg-black/60 backdrop-blur-md border-b border-white/5 py-4">
         <div class="container mx-auto px-4 md:px-8 flex items-center justify-between">
             <!-- Logo area -->
             <div class="flex-shrink-0">
@@ -149,7 +149,7 @@
     <!-- Footer -->
     <footer class="bg-black mt-5 bg-opacity-50 text-white text-center py-4 mt-auto">
         <div class="container mx-auto">
-            <p class="text-sm font-begum">&copy; 2023 Josue Molina. Todos los derechos reservados.</p>
+            <p class="text-sm font-dearest">&copy; 2023 Josue Molina. Todos los derechos reservados.</p>
             <div class="mt-2">
                 <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-twitter"></i></a>

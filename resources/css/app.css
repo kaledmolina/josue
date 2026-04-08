@@ -10,9 +10,22 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'DearestJohn';
+    src: url('/fonts/DearestJohnW01-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 .font-begum {
     font-family: 'Begum', sans-serif;
 }
+
+.font-dearest {
+    font-family: 'DearestJohn', serif;
+}
+
 .color-body{
     background-color: #000712;
 }
