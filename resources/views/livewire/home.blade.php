@@ -38,29 +38,29 @@
                 sm:px-6 sm:pb-10 md:w-auto md:absolute md:bottom-24 md:left-12
                 lg:ml-20 lg:mb-20 transition-all duration-300 z-20">
             <div data-aos="fade-up" data-aos-delay="200" class="bg-black/60 backdrop-blur-xl border border-white/10
-                    rounded-3xl shadow-2xl p-6 md:p-10
-                    max-w-sm md:max-w-2xl
+                    rounded-3xl shadow-2xl p-6 md:p-8
+                    max-w-sm md:max-w-xl
                     mx-auto md:mx-0 text-center md:text-left
                     transform transition-all duration-300 hover:bg-black/70 group">
 
-                <h1 class="text-white text-4xl md:text-7xl font-bold font-dearest mb-2 leading-none uppercase tracking-wide
+                <h1 class="text-white text-3xl md:text-5xl font-bold font-dearest mb-2 leading-none uppercase tracking-wide
                         drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                     Visión Cinematográfica
                 </h1>
-                <p class="text-gray-200 text-base md:text-xl 
-                        font-dearest mb-6
+                <p class="text-gray-200 text-sm md:text-base 
+                        font-dearest mb-4
                         group-hover:text-white transition-colors max-w-lg">
                     Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo
                     cinematográfico único que refleja su visión auténtica del mundo.
                 </p>
 
-                <div class="mt-2 flex flex-wrap justify-center md:justify-start gap-4">
+                <div class="mt-2 flex flex-wrap justify-center md:justify-start gap-3">
                     <a href="/proyectos"
-                        class="px-10 py-4 text-sm bg-white text-black rounded-full font-bold uppercase tracking-[0.2em] transform transition-all hover:scale-105 hover:bg-blue-50 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                        class="px-7 py-3 text-xs bg-white text-black rounded-full font-bold uppercase tracking-[0.2em] transform transition-all hover:scale-105 hover:bg-blue-50 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                         Ver Work
                     </a>
                     <a href="/contacto"
-                        class="px-10 py-4 text-sm bg-black/40 text-white border border-white/20 rounded-full font-bold uppercase tracking-[0.2em] backdrop-blur-md transform transition-all hover:scale-105 hover:bg-white hover:text-black shadow-xl">
+                        class="px-7 py-3 text-xs bg-black/40 text-white border border-white/20 rounded-full font-bold uppercase tracking-[0.2em] backdrop-blur-md transform transition-all hover:scale-105 hover:bg-white hover:text-black shadow-xl">
                         Contactar
                     </a>
                 </div>
