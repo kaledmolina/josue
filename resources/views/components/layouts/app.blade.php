@@ -30,7 +30,7 @@
     <!-- Navbar -->
     <!-- Navbar -->
     <nav id="navbar"
-        class="navbar font-dearest fixed top-0 w-full z-50 transition-all duration-300 bg-black/60 backdrop-blur-md border-b border-white/5 py-4">
+        class="navbar font-dearest fixed top-0 w-full z-50 transition-all duration-500 py-6">
         <div class="container mx-auto px-4 md:px-8 flex items-center justify-between">
             <!-- Logo area -->
             <div class="flex-shrink-0">
@@ -39,41 +39,40 @@
                     <img src="{{ asset('Images/marcaX.png') }}" alt="Logo"
                         class="h-8 w-auto opacity-90 transition-transform group-hover:scale-110 duration-500">
                     <span
-                        class="text-xl tracking-wide text-white font-medium group-hover:tracking-widest transition-all duration-500">Josue
+                        class="text-xl tracking-[0.2em] text-white font-bold uppercase transition-all duration-500">Josué
                         Molina</span>
                 </a>
             </div>
 
-            <!-- Desktop Menu (Right Aligned) -->
-            <div class="hidden lg:flex items-center gap-1">
-                <ul class="flex items-center gap-1">
+            <div class="hidden lg:flex items-center bg-black/50 backdrop-blur-xl border border-white/10 rounded-full px-6 py-1 shadow-2xl">
+                <ul class="flex items-center gap-2">
                     <li>
                         <a href="/" wire:navigate
-                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->routeIs('home') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
+                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->routeIs('home') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Inicio
                         </a>
                     </li>
                     <li>
                         <a href="/proyectos"
-                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->is('proyectos*') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
+                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('proyectos*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Proyectos
                         </a>
                     </li>
                     <li>
                         <a href="/fotografias"
-                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->is('fotografias*') || request()->is('album*') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
+                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('fotografias*') || request()->is('album*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Fotografía
                         </a>
                     </li>
                     <li>
                         <a href="/acerca"
-                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->is('acerca*') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
+                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('acerca*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Acerca
                         </a>
                     </li>
                     <li>
                         <a href="/contacto"
-                            class="relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white {{ request()->is('contacto*') ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] border border-white/10' : 'text-gray-400 border border-transparent' }}">
+                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('contacto*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Contacto
                         </a>
                     </li>

@@ -11,7 +11,14 @@
         <!-- Fondo para desktop -->
         <div class="hidden md:block absolute inset-0 bg-cover bg-center transition-transform duration-1000"
             style="background-image: url('{{ asset('Images/ampli-final2.png') }}');">
-            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/70"></div>
+        </div>
+
+        <!-- Texto gigante de fondo -->
+        <div class="hidden lg:block absolute right-[-5%] top-1/2 -translate-y-1/2 z-10 pointer-events-none overflow-hidden">
+            <h2 class="text-[25rem] font-bold text-white/5 font-dearest leading-none tracking-tighter uppercase select-none">
+                Josué
+            </h2>
         </div>
 
         <div class="flex-1 pt-16 grid place-items-center">
@@ -35,8 +42,8 @@
                     mx-auto md:mx-0 text-center md:text-left
                     transform transition-all duration-300 hover:bg-black/70 group">
 
-                <h1 class="text-white text-2xl md:text-4xl font-bold font-dearest mb-3 leading-tight">
-                    Vision Cinematográfica
+                <h1 class="text-white text-3xl md:text-5xl font-bold font-dearest mb-4 leading-tight uppercase tracking-widest">
+                    Visión Cinematográfica
                 </h1>
                 <p class="text-gray-300 text-sm md:text-base 
                         font-dearest mb-4
@@ -45,13 +52,13 @@
                     cinematográfico único que refleja su visión auténtica del mundo.
                 </p>
 
-                <div class="mt-4 flex justify-center md:justify-start gap-3">
+                <div class="mt-6 flex flex-wrap justify-center md:justify-start gap-4">
                     <a href="/proyectos"
-                        class="px-5 py-2 text-sm bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition-colors">
-                        Ver Trabajo
+                        class="px-8 py-3 text-xs bg-white text-black rounded-full font-bold uppercase tracking-widest hover:bg-gray-200 transition-all transform hover:scale-105 shadow-xl">
+                        Ver Work
                     </a>
                     <a href="/contacto"
-                        class="px-5 py-2 text-sm border border-white text-white rounded-full font-semibold hover:bg-white/10 transition-colors">
+                        class="px-8 py-3 text-xs bg-white text-black rounded-full font-bold uppercase tracking-widest hover:bg-gray-200 transition-all transform hover:scale-105 shadow-xl">
                         Contactar
                     </a>
                 </div>
