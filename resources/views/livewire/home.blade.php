@@ -38,9 +38,8 @@
                 <h1 class="text-white text-2xl md:text-4xl font-bold font-dearest mb-3 leading-tight">
                     Vision Cinematográfica
                 </h1>
-
                 <p class="text-gray-300 text-sm md:text-base 
-                        leading-relaxed font-light font-sans mb-4
+                        leading-relaxed tracking-wide font-dearest mb-4
                         group-hover:text-white transition-colors">
                     Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo
                     cinematográfico único que refleja su visión auténtica del mundo.
