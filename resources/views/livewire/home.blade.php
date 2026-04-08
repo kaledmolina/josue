@@ -39,7 +39,7 @@
                     Vision Cinematográfica
                 </h1>
                 <p class="text-gray-300 text-sm md:text-base 
-                        leading-relaxed tracking-wide font-dearest mb-4
+                        font-dearest mb-4
                         group-hover:text-white transition-colors">
                     Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo
                     cinematográfico único que refleja su visión auténtica del mundo.

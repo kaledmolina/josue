@@ -5,7 +5,7 @@
             <h1 class="text-4xl md:text-6xl font-bold font-dearest mb-6 tracking-tight">
                 Álbumes Fotográficos
             </h1>
-            <p class="text-gray-400 text-lg md:text-xl font-light max-w-2xl mx-auto">
+            <p class="text-gray-400 text-lg md:text-xl font-dearest max-w-2xl mx-auto">
                 Una colección de momentos capturados a través de mi lente, explorando la narrativa visual en cada
                 imagen.
             </p>

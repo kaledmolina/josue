@@ -28,7 +28,7 @@
                 </h1>
                 <div
                     class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:bg-black/70 group">
-                    <p class="text-base md:text-lg text-gray-200 leading-relaxed font-light">
+                    <p class="text-base md:text-lg text-gray-200 font-dearest">
                         {{ $content->hero_description }}
                     </p>
                 </div>

@@ -39,7 +39,7 @@
                         {{ $albumData['date'] }}
                     </span>
                     <span class="w-1 h-1 bg-white/30 rounded-full"></span>
-                    <span class="text-white font-medium">{{ count($albumData['photos']) }} fotografías</span>
+                    <p class="text-gray-200 font-dearest max-w-2xl">{{ count($albumData['photos']) }} fotografías</span>
                 </div>
             </div>
         </div>

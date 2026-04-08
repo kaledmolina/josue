@@ -31,7 +31,7 @@
                         Galería
                     </span>
                     <h3 class="text-2xl font-bold text-white mb-2 font-dearest">Fotografía</h3>
-                    <p class="text-gray-300 text-xs mb-3 line-clamp-2 font-light">
+                    <p class="text-gray-300 text-xs mb-3 line-clamp-2 font-dearest">
                         Explora momentos únicos congelados en el tiempo.
                     </p>
                     <div class="flex items-center text-white font-semibold text-xs">
@@ -60,7 +60,7 @@
                         Producción
                     </span>
                     <h3 class="text-2xl font-bold text-white mb-2 font-dearest">Videos</h3>
-                    <p class="text-gray-300 text-xs mb-3 line-clamp-2 font-light">
+                    <p class="text-gray-300 text-xs mb-3 line-clamp-2 font-dearest">
                         Descubre narrativas visuales en movimiento.
                     </p>
                     <div class="flex items-center text-white font-semibold text-xs">

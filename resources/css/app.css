@@ -24,6 +24,8 @@
 
 .font-dearest {
     font-family: 'DearestJohn', serif;
+    letter-spacing: 0.025em; /* Equivalente a tracking-wide */
+    line-height: 1.625;      /* Equivalente a leading-relaxed */
 }
 
 .color-body{

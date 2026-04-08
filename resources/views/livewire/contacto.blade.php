@@ -58,7 +58,7 @@
                         <h2 class="text-4xl md:text-5xl font-bold mb-3 text-white">
                             {{ $stat->value }}
                         </h2>
-                        <p class="text-lg text-white/90 font-medium tracking-wide">{{ $stat->description }}</p>
+                        <p class="text-lg text-white/90 font-dearest">{{ $stat->description }}</p>
                         @if($stat->updated_at)
                             <p class="text-[10px] text-white/40 mt-3 font-mono">Act: {{ $stat->updated_at->format('d/m H:i') }}</p>
                         @endif
@@ -78,9 +78,9 @@
                         {!! $contactDescription !!}
                     @else
                         <h3 class="text-2xl font-bold mb-4 text-white">¿Listo para crear algo increíble?</h3>
-                        <p class="font-light">Ya sea que tengas una historia que contar, una marca que elevar o un momento
+                        <p class="font-dearest">Ya sea que tengas una historia que contar, una marca que elevar o un momento
                             que capturar, estoy aquí para hacerlo realidad.</p>
-                        <p class="font-light">Contáctame y comencemos a darle vida a tu visión.</p>
+                        <p class="font-dearest">Contáctame y comencemos a darle vida a tu visión.</p>
                     @endif
                 </div>
             </div>
