@@ -28,7 +28,7 @@
             </div>
 
             <div class="flex-grow w-full">
-                <h2 class="text-4xl md:text-5xl font-bold font-begum mb-4 leading-tight">{{ $albumData['title'] }}</h2>
+                <h2 class="text-4xl md:text-5xl font-bold font-dearest mb-4 leading-tight">{{ $albumData['title'] }}</h2>
                 <div class="flex flex-wrap items-center gap-4 text-gray-400">
                     <span class="inline-flex items-center gap-1">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

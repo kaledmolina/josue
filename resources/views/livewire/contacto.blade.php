@@ -73,7 +73,7 @@
             <div data-aos="fade-right"
                 class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-10 transform transition-all duration-300 hover:bg-black/70 group flex items-center">
                 <div
-                    class="text-base md:text-lg text-white/90 leading-relaxed text-center md:text-left font-begum space-y-4">
+                    class="text-base md:text-lg text-white/90 leading-relaxed text-center md:text-left font-dearest space-y-4">
                     @if($contactDescription)
                         {!! $contactDescription !!}
                     @else
@@ -89,7 +89,7 @@
             <div data-aos="fade-left"
                 class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-10 transform transition-all duration-300 hover:bg-black/70 group">
                 <div class="w-full">
-                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 font-begum text-left">Contáctanos</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 font-dearest text-left">Contáctanos</h2>
                     <form wire:submit.prevent="submit" class="space-y-6 text-left">
                         @if(session()->has('message'))
                             <div

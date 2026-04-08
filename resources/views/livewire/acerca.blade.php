@@ -21,7 +21,7 @@
 
             <!-- Texto presentación -->
             <div data-aos="fade-left" class="w-full lg:w-2/3 text-center lg:text-left">
-                <h1 class="text-4xl md:text-5xl font-bold font-begum mb-6 leading-tight">
+                <h1 class="text-4xl md:text-5xl font-bold font-dearest mb-6 leading-tight">
                     <span class="text-white">
                         {{ $content->hero_title }}
                     </span>
@@ -40,7 +40,7 @@
             <!-- Educación -->
             <div data-aos="fade-up"
                 class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:bg-black/70 group">
-                <h2 class="text-2xl md:text-3xl font-begum text-white mb-6 flex items-center gap-3">
+                <h2 class="text-2xl md:text-3xl font-dearest text-white mb-6 flex items-center gap-3">
                     <i class="fas fa-graduation-cap text-blue-400"></i> Formación
                 </h2>
                 <div class="relative pl-6 border-l-2 border-blue-500/30 space-y-6">
@@ -59,7 +59,7 @@
             <!-- Experiencia -->
             <div data-aos="fade-up" data-aos-delay="100"
                 class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:bg-black/70 group">
-                <h2 class="text-2xl md:text-3xl font-begum text-white mb-6 flex items-center gap-3">
+                <h2 class="text-2xl md:text-3xl font-dearest text-white mb-6 flex items-center gap-3">
                     <i class="fas fa-briefcase text-purple-400"></i> Experiencia
                 </h2>
                 <div class="relative pl-6 border-l-2 border-purple-500/30 space-y-6">
@@ -79,7 +79,7 @@
         <!-- Habilidades (Skills) -->
         <div data-aos="fade-up"
             class="mt-12 bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-10 transform transition-all duration-300 hover:bg-black/70 group">
-            <h2 class="text-3xl font-begum text-white mb-8 text-center md:text-left">
+            <h2 class="text-3xl font-dearest text-white mb-8 text-center md:text-left">
                 Habilidades <span class="text-gray-400">Profesionales</span>
             </h2>
 
@@ -108,7 +108,7 @@
 
         <!-- Llamado a la acción -->
         <div data-aos="zoom-in" class="text-center mt-20 mb-10">
-            <h2 class="text-3xl font-begum text-white mb-8">
+            <h2 class="text-3xl font-dearest text-white mb-8">
                 <span class="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
                     ¿Listo para trabajar juntos?
                 </span>

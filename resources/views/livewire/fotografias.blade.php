@@ -2,7 +2,7 @@
     <div class="container mx-auto px-4 relative z-10">
         <!-- Header -->
         <div class="text-center mb-16" data-aos="fade-up">
-            <h1 class="text-4xl md:text-6xl font-bold font-begum mb-6 tracking-tight">
+            <h1 class="text-4xl md:text-6xl font-bold font-dearest mb-6 tracking-tight">
                 Álbumes Fotográficos
             </h1>
             <p class="text-gray-400 text-lg md:text-xl font-light max-w-2xl mx-auto">

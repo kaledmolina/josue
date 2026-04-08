@@ -35,7 +35,7 @@
                     mx-auto md:mx-0 text-center md:text-left
                     transform transition-all duration-300 hover:bg-black/70 group">
 
-                <h1 class="text-white text-2xl md:text-4xl font-bold font-begum mb-3 leading-tight">
+                <h1 class="text-white text-2xl md:text-4xl font-bold font-dearest mb-3 leading-tight">
                     Vision Cinematográfica
                 </h1>
 

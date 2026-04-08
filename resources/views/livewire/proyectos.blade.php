@@ -6,7 +6,7 @@
 
     <div class="w-full max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
         <div data-aos="fade-down" class="text-center mb-12">
-            <h2 id="proyectos" class="text-3xl md:text-4xl font-bold text-white font-begum mb-2">
+            <h2 id="proyectos" class="text-3xl md:text-4xl font-bold text-white font-dearest mb-2">
                 Mis Proyectos
             </h2>
             <div class="w-16 h-1 bg-white/20 mx-auto rounded-full"></div>
@@ -30,7 +30,7 @@
                         class="inline-block px-3 py-0.5 mb-2 text-[10px] font-bold tracking-wider text-white uppercase bg-white/10 rounded-full border border-white/20">
                         Galería
                     </span>
-                    <h3 class="text-2xl font-bold text-white mb-2 font-begum">Fotografía</h3>
+                    <h3 class="text-2xl font-bold text-white mb-2 font-dearest">Fotografía</h3>
                     <p class="text-gray-300 text-xs mb-3 line-clamp-2 font-light">
                         Explora momentos únicos congelados en el tiempo.
                     </p>
@@ -59,7 +59,7 @@
                         class="inline-block px-3 py-0.5 mb-2 text-[10px] font-bold tracking-wider text-white uppercase bg-white/10 rounded-full border border-white/20">
                         Producción
                     </span>
-                    <h3 class="text-2xl font-bold text-white mb-2 font-begum">Videos</h3>
+                    <h3 class="text-2xl font-bold text-white mb-2 font-dearest">Videos</h3>
                     <p class="text-gray-300 text-xs mb-3 line-clamp-2 font-light">
                         Descubre narrativas visuales en movimiento.
                     </p>

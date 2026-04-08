@@ -233,7 +233,7 @@
 
                 @if($horizontalVideos->isNotEmpty())
                     <div id="videos" class="mb-20" style="scroll-margin-top: 12rem;">
-                        <h3 class="text-3xl lg:text-4xl font-bold text-white font-begum text-shadow mb-12 text-center">
+                        <h3 class="text-3xl lg:text-4xl font-bold text-white font-dearest text-shadow mb-12 text-center">
                             Videos
                         </h3>
                         
@@ -257,10 +257,10 @@
                                         
                                         <div class="w-full lg:w-1/2 flex items-center">
                                             <div class="card-glass rounded-2xl shadow-2xl p-8 lg:p-10 w-full h-full flex flex-col justify-center">
-                                                <h3 class="text-3xl lg:text-4xl font-bold text-white font-begum mb-6 text-shadow">
+                                                <h3 class="text-3xl lg:text-4xl font-bold text-white font-dearest mb-6 text-shadow">
                                                     {{ $video->title }}
                                                 </h3>
-                                                <div class="text-gray-100 font-begum text-lg leading-relaxed prose-custom text-justify">
+                                                <div class="text-gray-100 font-dearest text-lg leading-relaxed prose-custom text-justify">
                                                     {!! $video->description !!}
                                                 </div>
                                             </div>
@@ -282,7 +282,7 @@
                     <div id="reels" class="mt-32" style="scroll-margin-top: 12rem;">
                         <div class="h-px bg-gradient-to-r from-transparent via-white/50 to-transparent mb-20"></div>
 
-                        <h3 class="text-3xl lg:text-4xl font-bold text-white font-begum text-shadow mb-12 text-center">
+                        <h3 class="text-3xl lg:text-4xl font-bold text-white font-dearest text-shadow mb-12 text-center">
                             Shorts & Reels
                         </h3>
 
@@ -306,10 +306,10 @@
                                         </div>
 
                                         <div class="gallery-overlay">
-                                            <h3 class="text-xl font-bold text-white font-begum mb-2 text-shadow line-clamp-2">
+                                            <h3 class="text-xl font-bold text-white font-dearest mb-2 text-shadow line-clamp-2">
                                                 {{ $video->title }}
                                             </h3>
-                                            <div class="text-gray-200 font-begum text-sm leading-relaxed line-clamp-3">
+                                            <div class="text-gray-200 font-dearest text-sm leading-relaxed line-clamp-3">
                                                 {!! strip_tags($video->description) !!}
                                             </div>
                                         </div>
@@ -328,7 +328,7 @@
                             <svg class="w-20 h-20 mx-auto mb-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                             </svg>
-                            <p class="text-white text-xl font-begum">
+                            <p class="text-white text-xl font-dearest">
                                 No hay videos disponibles
                             </p>
                         </div>
