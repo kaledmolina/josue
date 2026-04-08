@@ -37,59 +37,46 @@
                 <a class="group flex items-center gap-3 px-2 py-1 rounded-lg transition-all hover:bg-white/5"
                     wire:navigate href="/">
                     <img src="{{ asset('Images/marcaX.png') }}" alt="Logo"
-                        class="h-8 w-auto opacity-90 transition-transform group-hover:scale-110 duration-500">
+                        class="h-9 w-auto opacity-90 transition-transform group-hover:scale-110 duration-500">
                     <span
-                        class="text-xl tracking-[0.2em] text-white font-bold uppercase transition-all duration-500">Josué
+                        class="text-2xl tracking-[0.2em] text-white font-bold uppercase transition-all duration-500">Josué
                         Molina</span>
                 </a>
             </div>
 
-            <div class="hidden lg:flex items-center bg-black/50 backdrop-blur-xl border border-white/10 rounded-full px-6 py-1 shadow-2xl">
-                <ul class="flex items-center gap-2">
+            <div class="hidden lg:flex items-center bg-black/60 backdrop-blur-2xl border border-white/10 rounded-full px-8 py-2 shadow-2xl">
+                <ul class="flex items-center gap-3">
                     <li>
                         <a href="/" wire:navigate
-                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->routeIs('home') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->routeIs('home') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Inicio
                         </a>
                     </li>
                     <li>
                         <a href="/proyectos"
-                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('proyectos*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('proyectos*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Proyectos
                         </a>
                     </li>
                     <li>
                         <a href="/fotografias"
-                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('fotografias*') || request()->is('album*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('fotografias*') || request()->is('album*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Fotografía
                         </a>
                     </li>
                     <li>
                         <a href="/acerca"
-                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('acerca*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('acerca*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Acerca
                         </a>
                     </li>
                     <li>
                         <a href="/contacto"
-                            class="px-4 py-2 rounded-full text-[11px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('contacto*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('contacto*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
                             Contacto
                         </a>
                     </li>
                 </ul>
-
-                <!-- Separator -->
-                <div class="h-6 w-px bg-white/10 mx-3"></div>
-
-                <!-- Extra Action / Social -->
-                <a href="/contacto"
-                    class="btn btn-sm btn-circle btn-ghost text-white/70 hover:text-white hover:bg-white/10 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                </a>
             </div>
 
             <!-- Mobile Menu Button -->

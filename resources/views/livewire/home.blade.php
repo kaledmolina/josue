@@ -16,7 +16,8 @@
 
         <!-- Texto gigante de fondo -->
         <div class="hidden lg:block absolute right-[-5%] top-1/2 -translate-y-1/2 z-10 pointer-events-none overflow-hidden">
-            <h2 class="text-[25rem] font-bold text-white/5 font-dearest leading-none tracking-tighter uppercase select-none">
+            <h2 class="text-[28rem] font-bold text-white/[0.07] font-dearest leading-none tracking-tighter uppercase select-none
+                    drop-shadow-[0_0_30px_rgba(59,130,246,0.2)]">
                 Josué
             </h2>
         </div>
@@ -42,23 +43,24 @@
                     mx-auto md:mx-0 text-center md:text-left
                     transform transition-all duration-300 hover:bg-black/70 group">
 
-                <h1 class="text-white text-3xl md:text-5xl font-bold font-dearest mb-4 leading-tight uppercase tracking-widest">
+                <h1 class="text-white text-4xl md:text-7xl font-bold font-dearest mb-2 leading-none uppercase tracking-widest
+                        drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                     Visión Cinematográfica
                 </h1>
-                <p class="text-gray-300 text-sm md:text-base 
-                        font-dearest mb-4
-                        group-hover:text-white transition-colors">
+                <p class="text-gray-200 text-base md:text-xl 
+                        font-dearest mb-6
+                        group-hover:text-white transition-colors max-w-lg">
                     Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo
                     cinematográfico único que refleja su visión auténtica del mundo.
                 </p>
 
-                <div class="mt-6 flex flex-wrap justify-center md:justify-start gap-4">
+                <div class="mt-2 flex flex-wrap justify-center md:justify-start gap-4">
                     <a href="/proyectos"
-                        class="px-8 py-3 text-xs bg-white text-black rounded-full font-bold uppercase tracking-widest hover:bg-gray-200 transition-all transform hover:scale-105 shadow-xl">
+                        class="px-10 py-4 text-sm bg-white text-black rounded-full font-bold uppercase tracking-[0.2em] transform transition-all hover:scale-105 hover:bg-blue-50 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                         Ver Work
                     </a>
                     <a href="/contacto"
-                        class="px-8 py-3 text-xs bg-white text-black rounded-full font-bold uppercase tracking-widest hover:bg-gray-200 transition-all transform hover:scale-105 shadow-xl">
+                        class="px-10 py-4 text-sm bg-black/40 text-white border border-white/20 rounded-full font-bold uppercase tracking-[0.2em] backdrop-blur-md transform transition-all hover:scale-105 hover:bg-white hover:text-black shadow-xl">
                         Contactar
                     </a>
                 </div>
