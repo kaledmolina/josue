@@ -30,7 +30,7 @@
     <!-- Navbar -->
     <!-- Navbar -->
     <nav id="navbar"
-        class="navbar font-dearest fixed top-0 w-full z-50 transition-all duration-500 py-6">
+        class="navbar font-dearest fixed top-0 w-full z-50 transition-all duration-500 py-8">
         <div class="container mx-auto px-4 md:px-8 flex items-center justify-between">
             <!-- Logo area -->
             <div class="flex-shrink-0">
@@ -44,7 +44,7 @@
                 </a>
             </div>
 
-            <div class="hidden lg:flex items-center bg-black/60 backdrop-blur-2xl border border-white/10 rounded-full px-8 py-2 shadow-2xl">
+            <div class="hidden lg:flex items-center bg-black/60 backdrop-blur-2xl border border-white/10 rounded-full px-12 py-4 shadow-2xl">
                 <ul class="flex items-center gap-3">
                     <li>
                         <a href="/" wire:navigate

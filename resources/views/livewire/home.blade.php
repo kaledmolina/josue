@@ -38,12 +38,12 @@
                 sm:px-6 sm:pb-10 md:w-auto md:absolute md:bottom-24 md:left-12
                 lg:ml-20 lg:mb-20 transition-all duration-300 z-20">
             <div data-aos="fade-up" data-aos-delay="200" class="bg-black/60 backdrop-blur-xl border border-white/10
-                    rounded-3xl shadow-2xl p-6
-                    max-w-sm md:max-w-md
+                    rounded-3xl shadow-2xl p-6 md:p-10
+                    max-w-sm md:max-w-2xl
                     mx-auto md:mx-0 text-center md:text-left
                     transform transition-all duration-300 hover:bg-black/70 group">
 
-                <h1 class="text-white text-4xl md:text-7xl font-bold font-dearest mb-2 leading-none uppercase tracking-widest
+                <h1 class="text-white text-4xl md:text-7xl font-bold font-dearest mb-2 leading-none uppercase tracking-wide
                         drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                     Visión Cinematográfica
                 </h1>
