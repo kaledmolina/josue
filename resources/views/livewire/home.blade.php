@@ -4,13 +4,13 @@
     <div class="h-screen bg-cover bg-center flex flex-col relative bg-gray-900 overflow-hidden">
         <!-- Fondo para mobile -->
         <div class="md:hidden absolute inset-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105"
-            style="background-image: url('{{ asset('Images/mobile-bg.png') }}');">
-            <div class="absolute inset-0 bg-black/30"></div>
+            style="background-image: url('{{ asset('Images/fondo.png') }}');">
+            <div class="absolute inset-0 bg-black/40"></div>
         </div>
 
         <!-- Fondo para desktop -->
         <div class="hidden md:block absolute inset-0 bg-cover bg-center transition-transform duration-1000"
-            style="background-image: url('{{ asset('Images/ampli-final2.png') }}');">
+            style="background-image: url('{{ asset('Images/fondo.png') }}');">
             <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/70"></div>
         </div>
 

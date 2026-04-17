@@ -210,7 +210,7 @@
         }
     </style>
 
-    <div class="min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('{{ asset('Images/ampli-final2.png') }}');">
+    <div class="min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('{{ asset('Images/fondo.png') }}');">
         <div class="min-h-screen bg-black/40">
             <section class="container mx-auto py-16 px-4 lg:px-8">
                 
