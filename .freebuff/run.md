@@ -17,7 +17,8 @@ From the project root (`C:\Users\Mi Pc\Desktop\Proyectos\josue`):
    - `touch database/database.sqlite`
    - `php artisan migrate --force`
 4. Frontend assets (only needed when changing CSS/JS — committed `public/build` already exists):
-   - `npm install` then `npm run build` (or `npm run dev` for the Vite dev server)
+   - `npm install` (installs Tailwind, Vite, daisyUI and AOS — they are build-time deps now; the site no longer loads any CSS/JS from CDNs)
+   - `npm run build` (or `npm run dev` for the Vite dev server)
 
 ## Run the server
 

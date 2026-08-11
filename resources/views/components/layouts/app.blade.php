@@ -6,27 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Josue Molina' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('Images/marcaX.png') }}">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="color-body flex flex-col min-h-screen font-dearest">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        const initAOS = () => {
-            AOS.init({
-                duration: 1000,
-                once: true,
-                offset: 100,
-                easing: 'ease-out-cubic'
-            });
-        };
-
-        document.addEventListener('DOMContentLoaded', initAOS);
-        document.addEventListener('livewire:navigated', initAOS);
-    </script>
     <!-- Navbar -->
     <!-- Navbar -->
     <nav id="navbar"
