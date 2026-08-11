@@ -411,11 +411,27 @@ document.addEventListener('livewire:navigated', scanLetters);
 var preloader = document.getElementById('preloader');
 if (preloader) {
     function hidePreloader() {
-        preloader.classList.add('done'); // queda invisible en el DOM (wire:ignore), sin reintroducirse
+        if (preloader.dataset.hidden) return;
+        preloader.dataset.hidden = '1';
+        preloader.classList.add('done'); // fade-out con transición (navegadores reales)
+        // Respaldo a prueba de todo: ocultarlo por completo aunque las transiciones no corran
+        // (p. ej. el webview de preview congela las transiciones CSS).
+        setTimeout(function () {
+            preloader.style.display = 'none';
+        }, 600);
     }
     window.addEventListener('load', function () { setTimeout(hidePreloader, 350); });
     setTimeout(hidePreloader, 2600); // respaldo
 }
+
+// Si Livewire reintroduce un preloader al navegar (morph del layout), ocultarlo de inmediato.
+document.addEventListener('livewire:navigated', function () {
+    var p = document.getElementById('preloader');
+    if (p && !p.dataset.hidden) {
+        p.classList.add('done');
+        p.style.display = 'none';
+    }
+});
 
 // ============================================================
 // UI/UX: parallax sutil en fondos de hero
