@@ -61,3 +61,58 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
+
+/* ============================================================
+   Fondo ambiental: iluminación (halos de luz suaves)
+   ============================================================ */
+#ambient-bg .glow {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    will-change: transform, opacity;
+    animation: glow-drift 18s ease-in-out infinite alternate;
+}
+
+.glow-blue {
+    width: 40rem;
+    height: 40rem;
+    top: -14rem;
+    left: -12rem;
+    background: radial-gradient(circle, rgba(120, 170, 255, 0.18) 0%, transparent 65%);
+}
+
+.glow-gold {
+    width: 36rem;
+    height: 36rem;
+    bottom: -12rem;
+    right: -10rem;
+    background: radial-gradient(circle, rgba(224, 190, 110, 0.13) 0%, transparent 65%);
+    animation-delay: -6s;
+}
+
+.glow-center {
+    width: 56rem;
+    height: 30rem;
+    top: 28%;
+    left: 50%;
+    margin-left: -28rem;
+    background: radial-gradient(ellipse, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+    animation-delay: -12s;
+}
+
+@keyframes glow-drift {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.55;
+    }
+    100% {
+        transform: translate3d(3rem, 2rem, 0) scale(1.12);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #ambient-bg .glow {
+        animation: none;
+    }
+}

@@ -212,7 +212,7 @@
 
     <div class="min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('{{ asset('Images/fondo.png') }}');">
         <div class="min-h-screen bg-black/40">
-            <section class="container mx-auto py-16 px-4 lg:px-8">
+            <section class="relative z-10 container mx-auto py-16 px-4 lg:px-8">
                 
                 <div class="text-center mb-16 pt-20">
                                       <!-- NAVEGACIÓN A SECCIONES FLOTANTE -->
@@ -340,76 +340,5 @@
     </div>
     
     <script async src="//www.instagram.com/embed.js"></script>
-    
-    @script
-    <script>
-        function processInstagramEmbeds() {
-            if (typeof window.instgrm !== 'undefined' && window.instgrm.Embeds) {
-                try {
-                    window.instgrm.Embeds.process();
-                    
-                    // Después de procesar, ocultar elementos adicionales
-                    setTimeout(() => {
-                        hideInstagramExtras();
-                    }, 1000);
-                } catch (e) {
-                    console.log('Instagram embed processing:', e);
-                }
-            } else {
-                setTimeout(processInstagramEmbeds, 100);
-            }
-        }
-
-        function hideInstagramExtras() {
-            // Buscar todos los iframes de Instagram
-            const instagramIframes = document.querySelectorAll('.instagram-embed-wrapper iframe');
-            
-            instagramIframes.forEach(iframe => {
-                try {
-                    // Intentar acceder al contenido del iframe (puede fallar por CORS)
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    
-                    if (iframeDoc) {
-                        // Ocultar footer, comentarios y descripción dentro del iframe
-                        const style = iframeDoc.createElement('style');
-                        style.textContent = `
-                            footer, 
-                            [role="contentinfo"],
-                            .Caption,
-                            ._a9zs,
-                            ._a9_1,
-                            article > div:last-child {
-                                display: none !important;
-                            }
-                            article {
-                                padding-bottom: 0 !important;
-                            }
-                        `;
-                        iframeDoc.head.appendChild(style);
-                    }
-                } catch (e) {
-                    // CORS bloqueará esto, pero lo intentamos
-                    console.log('No se puede acceder al iframe de Instagram (CORS)');
-                }
-            });
-
-            // Ocultar elementos fuera del iframe
-            document.querySelectorAll('.instagram-embed-wrapper .instagram-media a, .instagram-embed-wrapper .instagram-media footer, .instagram-embed-wrapper .instagram-media p').forEach(el => {
-                el.style.display = 'none';
-                el.style.visibility = 'hidden';
-                el.style.height = '0';
-                el.style.overflow = 'hidden';
-            });
-        }
-
-        document.addEventListener('livewire:initialized', () => {
-            setTimeout(() => processInstagramEmbeds(), 300);
-        });
-
-        document.addEventListener('livewire:navigated', () => {
-            setTimeout(() => processInstagramEmbeds(), 300);
-        });
-    </script>
-    @endscript
 </div>
 

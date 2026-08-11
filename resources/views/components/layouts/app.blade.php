@@ -11,6 +11,14 @@
 </head>
 
 <body class="color-body flex flex-col min-h-screen font-dearest">
+    <!-- Fondo ambiental: partículas + iluminación (detrás del contenido, sin bloquear clicks) -->
+    <div id="ambient-bg" class="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <canvas id="particles-canvas" class="absolute inset-0 w-full h-full"></canvas>
+        <div class="glow glow-blue"></div>
+        <div class="glow glow-gold"></div>
+        <div class="glow glow-center"></div>
+    </div>
+
     <!-- Navbar -->
     @php
         // Página actual para resaltar el enlace activo del menú.
