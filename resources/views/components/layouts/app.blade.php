@@ -37,7 +37,7 @@
                 </a>
             </div>
 
-            <div class="hidden lg:flex items-center bg-black/60 backdrop-blur-2xl border border-white/10 rounded-full px-12 py-4 shadow-2xl">
+            <div class="hidden lg:flex items-center bg-black/90 backdrop-blur-2xl border border-white/10 rounded-full px-12 py-4 shadow-2xl">
                 <ul class="flex items-center gap-3">
                     <li>
                         <a href="/" wire:navigate

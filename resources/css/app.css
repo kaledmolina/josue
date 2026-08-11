@@ -55,12 +55,9 @@
     z-index: 50; /* Por encima del contenido (z-10) y del fondo fijo */
 }
 
-/* Al hacer scroll: fondo oscuro translúcido + compacto para mantener legibilidad */
+/* Al hacer scroll: el navbar solo se compacta (sin fondo de barra;
+   se mantiene transparente para que solo se vea la cápsula del menú) */
 .navbar.scrolled {
-    background-color: rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
