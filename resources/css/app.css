@@ -48,18 +48,19 @@
 /* Estilo para el navbar */
 .navbar {
     background-color: transparent; /* Hace el fondo transparente */
-    position: absolute; /* Asegura que se superponga sobre el contenido */
-    width: 100%; /* Se extiende a todo el ancho */
-    z-index: 10; /* Se asegura de estar sobre otros elementos */
+    position: fixed; /* Fijo: se mantiene visible al hacer scroll y por encima del contenido */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50; /* Por encima del contenido (z-10) y del fondo fijo */
 }
 
-/* Opcional: Estilo para los enlaces del navbar */
-.navbar a {
-    color: white; /* Cambia el color del texto */
-    text-decoration: none;
-    padding: 10px;
-}
-
-.navbar a:hover {
-    color: #f0f0f0; /* Color más claro al pasar el mouse */
+/* Al hacer scroll: fondo oscuro translúcido + compacto para mantener legibilidad */
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }

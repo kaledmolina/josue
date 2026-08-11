@@ -12,7 +12,16 @@
 
 <body class="color-body flex flex-col min-h-screen font-dearest">
     <!-- Navbar -->
-    <!-- Navbar -->
+    @php
+        // Página actual para resaltar el enlace activo del menú.
+        $navActive = [
+            'home' => request()->routeIs('home'),
+            'proyectos' => request()->is('proyectos*'),
+            'fotografia' => request()->is('fotografias*') || request()->is('album*'),
+            'acerca' => request()->is('acerca*'),
+            'contacto' => request()->is('contacto*'),
+        ];
+    @endphp
     <nav id="navbar"
         class="navbar font-dearest fixed top-0 w-full z-50 transition-all duration-500 py-8">
         <div class="container mx-auto px-4 md:px-8 flex items-center justify-between">
@@ -32,31 +41,56 @@
                 <ul class="flex items-center gap-3">
                     <li>
                         <a href="/" wire:navigate
-                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->routeIs('home') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            @class([
+                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
+                                'bg-white text-black shadow-lg' => $navActive['home'],
+                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['home'],
+                            ])
+                            @if($navActive['home']) aria-current="page" @endif>
                             Inicio
                         </a>
                     </li>
                     <li>
                         <a href="/proyectos"
-                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('proyectos*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            @class([
+                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
+                                'bg-white text-black shadow-lg' => $navActive['proyectos'],
+                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['proyectos'],
+                            ])
+                            @if($navActive['proyectos']) aria-current="page" @endif>
                             Proyectos
                         </a>
                     </li>
                     <li>
                         <a href="/fotografias"
-                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('fotografias*') || request()->is('album*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            @class([
+                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
+                                'bg-white text-black shadow-lg' => $navActive['fotografia'],
+                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['fotografia'],
+                            ])
+                            @if($navActive['fotografia']) aria-current="page" @endif>
                             Fotografía
                         </a>
                     </li>
                     <li>
                         <a href="/acerca"
-                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('acerca*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            @class([
+                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
+                                'bg-white text-black shadow-lg' => $navActive['acerca'],
+                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['acerca'],
+                            ])
+                            @if($navActive['acerca']) aria-current="page" @endif>
                             Acerca
                         </a>
                     </li>
                     <li>
                         <a href="/contacto"
-                            class="px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300 {{ request()->is('contacto*') ? 'text-white' : 'text-gray-300 hover:text-white' }}">
+                            @class([
+                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
+                                'bg-white text-black shadow-lg' => $navActive['contacto'],
+                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['contacto'],
+                            ])
+                            @if($navActive['contacto']) aria-current="page" @endif>
                             Contacto
                         </a>
                     </li>
@@ -76,19 +110,44 @@
                     <ul tabindex="0"
                         class="menu dropdown-content mt-3 z-[1] p-2 shadow-2xl bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl w-64 right-0">
                         <li><a wire:navigate href="/"
-                                class="{{ request()->routeIs('home') ? 'text-white bg-white/10' : 'text-gray-400' }}">Inicio</a>
+                                @class([
+                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
+                                    'bg-white text-black' => $navActive['home'],
+                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['home'],
+                                ])
+                                @if($navActive['home']) aria-current="page" @endif>Inicio</a>
                         </li>
                         <li><a href="/proyectos"
-                                class="{{ request()->is('proyectos*') ? 'text-white bg-white/10' : 'text-gray-400' }}">Proyectos</a>
+                                @class([
+                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
+                                    'bg-white text-black' => $navActive['proyectos'],
+                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['proyectos'],
+                                ])
+                                @if($navActive['proyectos']) aria-current="page" @endif>Proyectos</a>
                         </li>
                         <li><a href="/fotografias"
-                                class="{{ request()->is('fotografias*') ? 'text-white bg-white/10' : 'text-gray-400' }}">Fotografía</a>
+                                @class([
+                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
+                                    'bg-white text-black' => $navActive['fotografia'],
+                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['fotografia'],
+                                ])
+                                @if($navActive['fotografia']) aria-current="page" @endif>Fotografía</a>
                         </li>
                         <li><a href="/acerca"
-                                class="{{ request()->is('acerca*') ? 'text-white bg-white/10' : 'text-gray-400' }}">Acerca</a>
+                                @class([
+                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
+                                    'bg-white text-black' => $navActive['acerca'],
+                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['acerca'],
+                                ])
+                                @if($navActive['acerca']) aria-current="page" @endif>Acerca</a>
                         </li>
                         <li><a href="/contacto"
-                                class="{{ request()->is('contacto*') ? 'text-white bg-white/10' : 'text-gray-400' }}">Contacto</a>
+                                @class([
+                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
+                                    'bg-white text-black' => $navActive['contacto'],
+                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['contacto'],
+                                ])
+                                @if($navActive['contacto']) aria-current="page" @endif>Contacto</a>
                         </li>
                     </ul>
                 </div>

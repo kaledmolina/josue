@@ -2,12 +2,15 @@ import './bootstrap';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+// Navbar: al hacer scroll se compacta y oscurece para mantener legibilidad.
+// El navbar siempre es fijo (position: fixed en CSS); aquí solo se alterna el estado visual.
 window.addEventListener('scroll', function () {
     var navbar = document.getElementById('navbar');
+    if (!navbar) return;
     if (window.scrollY > 20) {
-        navbar.classList.add('fixed', 'bg-opacity-90', 'shadow-lg');
+        navbar.classList.add('scrolled');
     } else {
-        navbar.classList.remove('fixed', 'bg-opacity-90', 'shadow-lg');
+        navbar.classList.remove('scrolled');
     }
 });
 
