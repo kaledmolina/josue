@@ -3,13 +3,13 @@
     <!-- Sección Hero mejorada -->
     <div class="h-screen bg-cover bg-center flex flex-col relative bg-gray-900 overflow-hidden">
         <!-- Fondo para mobile -->
-        <div class="md:hidden absolute inset-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105"
+        <div data-parallax="0.25" class="md:hidden absolute inset-0 bg-cover bg-center"
             style="background-image: url('{{ asset('Images/fondo.png') }}');">
             <div class="absolute inset-0 bg-black/40"></div>
         </div>
 
         <!-- Fondo para desktop -->
-        <div class="hidden md:block absolute inset-0 bg-cover bg-center transition-transform duration-1000"
+        <div data-parallax="0.25" class="hidden md:block absolute inset-0 bg-cover bg-center"
             style="background-image: url('{{ asset('Images/fondo.png') }}');">
             <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/70"></div>
         </div>
@@ -43,12 +43,13 @@
                     mx-auto md:mx-0 text-center md:text-left
                     transform transition-all duration-300 hover:bg-black/70 group">
 
-                <h1 class="text-white text-3xl md:text-5xl font-bold font-dearest mb-2 leading-none uppercase tracking-wide
+                <h1 data-letters
+                    class="text-white text-3xl md:text-5xl font-bold font-dearest mb-2 leading-none uppercase tracking-wide
                         drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                     Visión Cinematográfica
                 </h1>
-                <p class="text-gray-200 text-sm md:text-base 
-                        font-dearest mb-4
+                <p class="text-gray-200 text-sm md:text-base
+                        mb-4
                         group-hover:text-white transition-colors max-w-lg">
                     Cineasta y creador de contenido apasionado, dedicado a capturar historias reales con un estilo
                     cinematográfico único que refleja su visión auténtica del mundo.

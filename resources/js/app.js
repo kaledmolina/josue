@@ -2,16 +2,40 @@ import './bootstrap';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-// Navbar: al hacer scroll se compacta (el navbar siempre es transparente y fijo;
-// solo la cápsula del menú lleva el fondo oscuro).
+// ============================================================
+// Scroll: navbar compacto + auto-hide, barra de progreso, botón arriba
+// ============================================================
+var lastScrollY = 0;
 window.addEventListener('scroll', function () {
     var navbar = document.getElementById('navbar');
-    if (!navbar) return;
-    if (window.scrollY > 20) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+    var y = window.scrollY;
+
+    // Compactar navbar (transparente; solo la cápsula lleva el fondo oscuro)
+    if (navbar) {
+        if (y > 20) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+
+        // Auto-hide: ocultar al bajar, mostrar al subir
+        var delta = y - lastScrollY;
+        if (y > 140 && delta > 5) navbar.classList.add('nav-hidden');
+        else if (delta < -3 || y <= 140) navbar.classList.remove('nav-hidden');
     }
+    lastScrollY = y;
+
+    // Barra de progreso de scroll
+    var bar = document.getElementById('scroll-progress');
+    if (bar) {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    }
+
+    // Botón volver arriba
+    var btt = document.getElementById('back-to-top');
+    if (btt) btt.classList.toggle('visible', y > 400);
+});
+
+document.getElementById('back-to-top')?.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 // Inicializar AOS una sola vez (el módulo se ejecuta después del parseo del DOM).
@@ -41,6 +65,7 @@ function initAmbientParticles() {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var particles = [];
     var raf = null;
+    var mouse = { x: null, y: null };
 
     var COLORS = ['255,255,255', '214,182,107']; // blanco y dorado suave
 
@@ -82,6 +107,21 @@ function initAmbientParticles() {
         ctx.clearRect(0, 0, w, h);
         for (var i = 0; i < particles.length; i++) {
             var p = particles[i];
+
+            // Repulsión suave al pasar el mouse
+            if (mouse.x !== null) {
+                var dx = p.x - mouse.x;
+                var dy = p.y - mouse.y;
+                var d2 = dx * dx + dy * dy;
+                var R = 140;
+                if (d2 < R * R && d2 > 0.01) {
+                    var d = Math.sqrt(d2);
+                    var force = ((R - d) / R) * 0.9;
+                    p.x += (dx / d) * force;
+                    p.y += (dy / d) * force;
+                }
+            }
+
             p.x += p.speedX;
             p.y += p.speedY;
             if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
@@ -101,6 +141,14 @@ function initAmbientParticles() {
     }
 
     window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', function (e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseleave', function () {
+        mouse.x = null;
+        mouse.y = null;
+    });
     document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
             cancelAnimationFrame(raf);
@@ -187,3 +235,198 @@ document.addEventListener('livewire:initialized', () => {
 document.addEventListener('livewire:navigated', () => {
     setTimeout(processInstagramEmbeds, 300);
 });
+
+// ============================================================
+// UI/UX: indicador deslizante del menú (píldora blanca)
+// ============================================================
+function positionNavIndicator() {
+    var ul = document.getElementById('nav-menu');
+    var ind = document.getElementById('nav-indicator');
+    if (!ul || !ind) return;
+    var active = ul.querySelector('a[aria-current="page"]') || ul.querySelector('a.active');
+    var ur = ul.getBoundingClientRect();
+    if (!active) {
+        ind.style.opacity = '0';
+        return;
+    }
+    var r = active.getBoundingClientRect();
+    ind.style.opacity = '1';
+    ind.style.width = r.width + 'px';
+    ind.style.height = r.height + 'px';
+    ind.style.transform = 'translate(' + (r.left - ur.left) + 'px,' + (r.top - ur.top) + 'px)';
+}
+
+document.addEventListener('DOMContentLoaded', positionNavIndicator);
+window.addEventListener('resize', positionNavIndicator);
+document.addEventListener('livewire:navigated', function () {
+    navCurrent = null;
+    positionNavIndicator();
+});
+
+// Hover: deslizar la píldora hacia el enlace señalado (translúcida sobre enlaces no activos)
+var navCurrent = null;
+
+function setNavPill(link) {
+    var ul = document.getElementById('nav-menu');
+    var ind = document.getElementById('nav-indicator');
+    if (!ul || !ind) return;
+    if (navCurrent === link) return;
+    navCurrent = link;
+    if (link) {
+        var ur = ul.getBoundingClientRect();
+        var r = link.getBoundingClientRect();
+        ind.style.opacity = '1';
+        ind.style.width = r.width + 'px';
+        ind.style.height = r.height + 'px';
+        ind.style.transform = 'translate(' + (r.left - ur.left) + 'px,' + (r.top - ur.top) + 'px)';
+        ind.classList.toggle('nav-hovering', !link.hasAttribute('aria-current'));
+    } else {
+        ind.classList.remove('nav-hovering');
+        positionNavIndicator();
+    }
+}
+
+document.addEventListener('mouseover', function (e) {
+    var link = e.target.closest && e.target.closest('#nav-menu a');
+    if (link) setNavPill(link);
+});
+document.addEventListener('mouseout', function (e) {
+    var link = e.target.closest && e.target.closest('#nav-menu a');
+    var ul = document.getElementById('nav-menu');
+    if (link && navCurrent === link && ul && !ul.matches(':hover')) {
+        setNavPill(null);
+    }
+});
+
+// ============================================================
+// UI/UX: cursor personalizado (punto + anillo) — solo mouse fino
+// ============================================================
+if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+    var dot = document.getElementById('cursor-dot');
+    var ring = document.getElementById('cursor-ring');
+    if (dot && ring) {
+        var mx = -100, my = -100, rx = -100, ry = -100;
+        window.addEventListener('mousemove', function (e) {
+            mx = e.clientX;
+            my = e.clientY;
+            dot.style.left = mx + 'px';
+            dot.style.top = my + 'px';
+        });
+        (function cursorLoop() {
+            rx += (mx - rx) * 0.16;
+            ry += (my - ry) * 0.16;
+            ring.style.left = rx + 'px';
+            ring.style.top = ry + 'px';
+            requestAnimationFrame(cursorLoop);
+        })();
+        document.addEventListener('mouseover', function (e) {
+            var t = e.target.closest && e.target.closest('a, button, [role="button"], .tilt, .shine, input, textarea, select, label');
+            document.body.classList.toggle('cursor-active', !!t);
+        });
+    }
+}
+
+// ============================================================
+// UI/UX: spotlight que sigue al mouse
+// ============================================================
+if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+    var spotlight = document.getElementById('spotlight');
+    if (spotlight) {
+        window.addEventListener('mousemove', function (e) {
+            spotlight.style.left = e.clientX + 'px';
+            spotlight.style.top = e.clientY + 'px';
+        });
+    }
+}
+
+// ============================================================
+// UI/UX: tilt 3D en tarjetas
+// ============================================================
+if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', function (e) {
+        var el = e.target.closest && e.target.closest('.tilt');
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = 'translateY(-6px) perspective(900px) rotateX(' + (-py * 8) + 'deg) rotateY(' + (px * 8) + 'deg)';
+    });
+    document.addEventListener('mouseout', function (e) {
+        var el = e.target.closest && e.target.closest('.tilt');
+        if (el && !el.matches(':hover') && !el.contains(e.relatedTarget)) {
+            el.style.transform = '';
+        }
+    });
+}
+
+// ============================================================
+// UI/UX: reveal de títulos letra por letra
+// ============================================================
+function revealLetters(el) {
+    if (el.dataset.lettersDone) return;
+    el.dataset.lettersDone = '1';
+    var text = el.textContent.trim();
+    if (!text) return;
+    el.setAttribute('aria-label', text);
+    el.textContent = '';
+    el.classList.add('letters');
+    var delay = 0;
+    text.split(' ').forEach(function (word) {
+        var wspan = document.createElement('span');
+        wspan.className = 'inline-block whitespace-nowrap';
+        word.split('').forEach(function (ch) {
+            var s = document.createElement('span');
+            s.className = 'letter';
+            s.style.animationDelay = delay + 'ms';
+            s.textContent = ch;
+            wspan.appendChild(s);
+            delay += 38;
+        });
+        el.appendChild(wspan);
+        el.appendChild(document.createTextNode(' '));
+        delay += 80;
+    });
+}
+
+var lettersObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+            revealLetters(entry.target);
+            lettersObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.4 });
+
+function scanLetters() {
+    document.querySelectorAll('[data-letters]').forEach(function (el) {
+        if (!el.dataset.lettersDone) lettersObserver.observe(el);
+    });
+}
+scanLetters();
+document.addEventListener('livewire:navigated', scanLetters);
+
+// ============================================================
+// UI/UX: preloader de entrada
+// ============================================================
+var preloader = document.getElementById('preloader');
+if (preloader) {
+    function hidePreloader() {
+        preloader.classList.add('done'); // queda invisible en el DOM (wire:ignore), sin reintroducirse
+    }
+    window.addEventListener('load', function () { setTimeout(hidePreloader, 350); });
+    setTimeout(hidePreloader, 2600); // respaldo
+}
+
+// ============================================================
+// UI/UX: parallax sutil en fondos de hero
+// ============================================================
+var parallaxTargets = document.querySelectorAll('[data-parallax]');
+if (parallaxTargets.length) {
+    window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        parallaxTargets.forEach(function (el) {
+            var speed = parseFloat(el.dataset.parallax || '0.3');
+            el.style.transform = 'translate3d(0,' + (y * speed) + 'px,0) scale(1.05)';
+        });
+    }, { passive: true });
+}

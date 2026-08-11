@@ -33,7 +33,7 @@
             </div>
 
             <div class="flex-grow w-full">
-                <h2 class="text-4xl md:text-5xl font-bold font-dearest mb-4 leading-tight">{{ $albumData['title'] }}</h2>
+                <h2 data-letters class="text-4xl md:text-5xl font-bold font-dearest mb-4 leading-tight">{{ $albumData['title'] }}</h2>
                 <div class="flex flex-wrap items-center gap-4 text-gray-400">
                     <span class="inline-flex items-center gap-1">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@
                         {{ $albumData['date'] }}
                     </span>
                     <span class="w-1 h-1 bg-white/30 rounded-full"></span>
-                    <p class="text-gray-200 font-dearest max-w-2xl">{{ $totalPhotos }} {{ $totalPhotos === 1 ? 'fotografía' : 'fotografías' }}</p>
+                    <p class="text-gray-200 max-w-2xl">{{ $totalPhotos }} {{ $totalPhotos === 1 ? 'fotografía' : 'fotografías' }}</p>
                 </div>
             </div>
         </div>
@@ -65,10 +65,10 @@
             </div>
         @endif
 
-        <!-- Photo Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Photo Grid (masonry) -->
+        <div class="columns-2 md:columns-3 lg:columns-4 gap-6">
             @foreach($albumData['photos'] as $index => $photo)
-                <div class="relative group cursor-pointer aspect-[3/4] rounded-xl overflow-hidden bg-white/5 border border-white/10"
+                <div class="relative group cursor-pointer mb-6 break-inside-avoid rounded-xl overflow-hidden bg-white/5 border border-white/10"
                     wire:key="photo-{{ $index }}" x-data="{ loaded: false }" data-aos="fade-up"
                     data-aos-delay="{{ ($index % 4) * 100 }}" wire:click="selectPhoto({{ $index }})">
 
@@ -84,7 +84,7 @@
 
                     <img src="{{ $photo['url'] }}" alt="{{ $photo['name'] ?? 'Foto del álbum' }}" @load="loaded = true"
                         x-init="loaded = $el.complete" referrerpolicy="no-referrer"
-                        class="w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:scale-105"
+                        class="w-full h-auto transition-all duration-700 opacity-0 group-hover:scale-105"
                         :class="{ 'opacity-100': loaded }" loading="lazy"
                         onerror="this.onerror=null;this.src='{{ $placeholder }}'">
 
@@ -105,10 +105,13 @@
         @if($selectedIndex !== null && isset($albumData['photos'][$selectedIndex]))
             @php $photo = $albumData['photos'][$selectedIndex]; @endphp
             <div class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center animate-fade-in"
-                x-data x-on:keydown.window.escape.window.prevent="$wire.closePhoto()"
+                x-ref="lightbox" x-data="{ touchX: 0 }"
+                x-on:keydown.window.escape.window.prevent="$wire.closePhoto()"
                 x-on:keydown.window.arrow-right.window.prevent="$wire.nextPhoto()"
                 x-on:keydown.window.arrow-left.window.prevent="$wire.prevPhoto()"
-                @click.self="$wire.closePhoto()">
+                @click.self="$wire.closePhoto()"
+                @touchstart="touchX = $event.touches[0].clientX"
+                @touchend="if (Math.abs($event.changedTouches[0].clientX - touchX) > 50) { $event.changedTouches[0].clientX < touchX ? $wire.nextPhoto() : $wire.prevPhoto() }">
 
                 <!-- Close -->
                 <button
@@ -117,6 +120,18 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" stroke="currentColor"
                         fill="none">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- Fullscreen -->
+                <button
+                    class="absolute top-6 right-20 z-10 text-white/50 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
+                    @click="document.fullscreenElement ? document.exitFullscreen() : $refs.lightbox.requestFullscreen()"
+                    aria-label="Pantalla completa">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 8V6a2 2 0 012-2h2M16 4h2a2 2 0 012 2v2M20 16v2a2 2 0 01-2 2h-2M8 20H6a2 2 0 01-2-2v-2" />
                     </svg>
                 </button>
 
@@ -142,12 +157,34 @@
                 @endif
 
                 <div class="relative max-w-7xl max-h-[90vh] p-4">
+                    <!-- Imagen con zoom + pan (clic para acercar, arrastrar para mover) -->
                     <img src="{{ $photo['url'] }}" alt="{{ $photo['name'] ?? 'Imagen en tamaño completo' }}" referrerpolicy="no-referrer"
-                        class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl ring-1 ring-white/10"
+                        class="lightbox-photo max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl ring-1 ring-white/10 select-none transition-transform duration-300"
+                        :class="zoomed ? 'cursor-grabbing' : 'cursor-zoom-in'"
+                        :style="zoomed ? 'transform: translate(' + panX + 'px,' + panY + 'px) scale(2.2)' : ''"
+                        x-data="{ zoomed: false, panX: 0, panY: 0, sx: 0, sy: 0, panning: false, moved: 0 }"
+                        @click="if (moved < 5) { zoomed = !zoomed; if (!zoomed) { panX = 0; panY = 0; } } moved = 0"
+                        @mousedown="if (zoomed) { sx = $event.clientX - panX; sy = $event.clientY - panY; panning = true; moved = 0 }"
+                        @mousemove.window="if (panning) { var dx = $event.clientX - sx; var dy = $event.clientY - sy; moved = Math.max(moved, Math.abs(dx) + Math.abs(dy)); panX = dx; panY = dy }"
+                        @mouseup.window="panning = false"
+                        @mouseleave.window="panning = false"
                         onerror="this.onerror=null;this.src='{{ $placeholder }}'">
 
+                    <!-- Filmstrip de miniaturas -->
+                    @if($totalPhotos > 1)
+                        <div class="mt-5 flex gap-2 overflow-x-auto pb-2 max-w-[90vw]">
+                            @foreach($albumData['photos'] as $i => $p)
+                                <button wire:click="selectPhoto({{ $i }})" aria-label="Foto {{ $i + 1 }}"
+                                    class="flex-shrink-0 rounded-lg overflow-hidden ring-2 transition-all duration-200 {{ $i === $selectedIndex ? 'ring-white scale-105' : 'ring-transparent opacity-40 hover:opacity-90' }}">
+                                    <img src="{{ $p['url'] }}" alt="" class="w-14 h-14 object-cover" loading="lazy"
+                                        referrerpolicy="no-referrer">
+                                </button>
+                            @endforeach
+                        </div>
+                    @endif
+
                     <!-- Footer info -->
-                    <div class="flex items-center justify-between mt-5 px-1">
+                    <div class="flex items-center justify-between mt-4 px-1">
                         <p class="text-gray-400 text-sm truncate max-w-[70%]">
                             {{ $photo['name'] ?? 'Imagen del álbum' }}
                         </p>
@@ -156,8 +193,8 @@
                         </p>
                     </div>
 
-                    <p class="text-center text-gray-600 mt-3 text-xs tracking-widest uppercase">
-                        Usa las flechas ← → para navegar · ESC para cerrar
+                    <p class="text-center text-gray-600 mt-2 text-xs tracking-widest uppercase">
+                        Clic para acercar · ← → para navegar · ESC para cerrar
                     </p>
                 </div>
             </div>

@@ -116,3 +116,291 @@
         animation: none;
     }
 }
+
+/* ============================================================
+   UI/UX: barra de progreso de scroll
+   ============================================================ */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, #60a5fa, #e0be6e);
+    z-index: 80;
+    pointer-events: none;
+}
+
+/* ============================================================
+   UI/UX: botón volver arriba
+   ============================================================ */
+#back-to-top {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+#back-to-top:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* ============================================================
+   UI/UX: navbar auto-hide
+   ============================================================ */
+.navbar.nav-hidden {
+    transform: translateY(-100%);
+}
+
+/* ============================================================
+   UI/UX: indicador deslizante del menú
+   ============================================================ */
+#nav-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #ffffff;
+    border-radius: 9999px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        height 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease, background-color 0.3s ease,
+        box-shadow 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+#nav-indicator.nav-hovering {
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: none;
+}
+
+/* ============================================================
+   UI/UX: animación de entrada del menú móvil fullscreen
+   ============================================================ */
+[x-cloak] {
+    display: none !important;
+}
+
+@keyframes menu-item-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-item-in {
+    animation: menu-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ============================================================
+   UI/UX: cursor personalizado (solo mouse fino)
+   ============================================================ */
+@media (pointer: fine) {
+    #cursor-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        margin: -3px 0 0 -3px;
+        border-radius: 9999px;
+        background: #ffffff;
+        pointer-events: none;
+        z-index: 200;
+    }
+
+    #cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 36px;
+        height: 36px;
+        margin: -18px 0 0 -18px;
+        border-radius: 9999px;
+        border: 1.5px solid rgba(255, 255, 255, 0.45);
+        pointer-events: none;
+        z-index: 200;
+        transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    body.cursor-active #cursor-ring {
+        width: 56px;
+        height: 56px;
+        margin: -28px 0 0 -28px;
+        border-color: rgba(96, 165, 250, 0.9);
+        background: rgba(96, 165, 250, 0.06);
+    }
+}
+
+@media (pointer: coarse) {
+    #cursor-dot,
+    #cursor-ring {
+        display: none !important;
+    }
+}
+
+/* ============================================================
+   UI/UX: efecto shine en tarjetas
+   ============================================================ */
+.shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.09), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.shine:hover::after {
+    left: 130%;
+}
+
+/* ============================================================
+   UI/UX: tilt 3D en tarjetas
+   ============================================================ */
+.tilt {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   UI/UX: preloader de entrada
+   ============================================================ */
+#preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    background: #000712;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#preloader.done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#preloader .preloader-bar {
+    width: 190px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#preloader .preloader-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, #60a5fa, #e0be6e);
+    border-radius: 2px;
+    animation: preloader-slide 1.1s ease-in-out infinite;
+}
+
+@keyframes preloader-slide {
+    0% {
+        transform: translateX(-110%);
+    }
+    100% {
+        transform: translateX(360%);
+    }
+}
+
+/* ============================================================
+   UI/UX: reveal de títulos letra por letra
+   ============================================================ */
+.letters .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.55em);
+    animation: letter-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes letter-up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   UI/UX: crossfade de fotos en el lightbox
+   ============================================================ */
+@keyframes photo-fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.lightbox-photo {
+    animation: photo-fade 0.35s ease;
+}
+
+/* ============================================================
+   UI/UX: spotlight que sigue al mouse
+   ============================================================ */
+#spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 44rem;
+    height: 44rem;
+    margin: -22rem 0 0 -22rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(120, 170, 255, 0.09) 0%, transparent 60%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@media (pointer: coarse) {
+    #spotlight {
+        display: none !important;
+    }
+}

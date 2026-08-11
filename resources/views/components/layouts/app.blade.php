@@ -10,7 +10,23 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="color-body flex flex-col min-h-screen font-dearest">
+<body class="color-body flex flex-col min-h-screen font-sans">
+    <!-- Preloader de entrada (wire:ignore para que Livewire no lo reintroduzca al navegar) -->
+    <div id="preloader" wire:ignore aria-hidden="true">
+        <img src="{{ asset('Images/marcaX.png') }}" alt="" class="h-14 w-auto opacity-90">
+        <div class="preloader-bar"></div>
+    </div>
+
+    <!-- Barra de progreso de scroll -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Cursor personalizado (solo desktop) -->
+    <div id="cursor-dot" aria-hidden="true"></div>
+    <div id="cursor-ring" aria-hidden="true"></div>
+
+    <!-- Spotlight que sigue al mouse -->
+    <div id="spotlight" aria-hidden="true"></div>
+
     <!-- Fondo ambiental: partículas + iluminación (detrás del contenido, sin bloquear clicks) -->
     <div id="ambient-bg" class="fixed inset-0 z-[1] pointer-events-none overflow-hidden" aria-hidden="true">
         <canvas id="particles-canvas" class="absolute inset-0 w-full h-full"></canvas>
@@ -46,118 +62,80 @@
             </div>
 
             <div class="hidden lg:flex items-center bg-black/90 backdrop-blur-2xl border border-white/10 rounded-full px-12 py-4 shadow-2xl">
-                <ul class="flex items-center gap-3">
-                    <li>
-                        <a href="/" wire:navigate
-                            @class([
-                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
-                                'bg-white text-black shadow-lg' => $navActive['home'],
-                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['home'],
-                            ])
-                            @if($navActive['home']) aria-current="page" @endif>
-                            Inicio
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/proyectos"
-                            @class([
-                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
-                                'bg-white text-black shadow-lg' => $navActive['proyectos'],
-                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['proyectos'],
-                            ])
-                            @if($navActive['proyectos']) aria-current="page" @endif>
-                            Proyectos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/fotografias"
-                            @class([
-                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
-                                'bg-white text-black shadow-lg' => $navActive['fotografia'],
-                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['fotografia'],
-                            ])
-                            @if($navActive['fotografia']) aria-current="page" @endif>
-                            Fotografía
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/acerca"
-                            @class([
-                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
-                                'bg-white text-black shadow-lg' => $navActive['acerca'],
-                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['acerca'],
-                            ])
-                            @if($navActive['acerca']) aria-current="page" @endif>
-                            Acerca
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/contacto"
-                            @class([
-                                'px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-all duration-300',
-                                'bg-white text-black shadow-lg' => $navActive['contacto'],
-                                'text-gray-300 hover:text-white hover:bg-white/10' => ! $navActive['contacto'],
-                            ])
-                            @if($navActive['contacto']) aria-current="page" @endif>
-                            Contacto
-                        </a>
-                    </li>
+                <ul id="nav-menu" class="relative flex items-center gap-3">
+                    <li id="nav-indicator" aria-hidden="true"></li>
+                    @foreach([
+                        ['href' => '/', 'label' => 'Inicio', 'active' => $navActive['home'], 'navigate' => true],
+                        ['href' => '/proyectos', 'label' => 'Proyectos', 'active' => $navActive['proyectos'], 'navigate' => false],
+                        ['href' => '/fotografias', 'label' => 'Fotografía', 'active' => $navActive['fotografia'], 'navigate' => false],
+                        ['href' => '/acerca', 'label' => 'Acerca', 'active' => $navActive['acerca'], 'navigate' => false],
+                        ['href' => '/contacto', 'label' => 'Contacto', 'active' => $navActive['contacto'], 'navigate' => false],
+                    ] as $item)
+                        <li>
+                            <a href="{{ $item['href'] }}"
+                                @if($item['navigate']) wire:navigate @endif
+                                @class([
+                                    'relative z-10 px-4 py-2 rounded-full text-[13px] font-bold tracking-[0.15em] uppercase transition-colors duration-300',
+                                    'text-black' => $item['active'],
+                                    'text-gray-300 hover:text-white' => ! $item['active'],
+                                ])
+                                @if($item['active']) aria-current="page" @endif>
+                                {{ $item['label'] }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
 
-            <!-- Mobile Menu Button -->
-            <div class="navbar-end w-auto lg:hidden">
-                <div class="dropdown dropdown-end">
-                    <label tabindex="0" class="btn btn-ghost btn-circle text-white hover:bg-white/10">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            <!-- Mobile Menu: overlay fullscreen -->
+            <div class="navbar-end w-auto lg:hidden" x-data="{ open: false }"
+                x-effect="document.body.style.overflow = open ? 'hidden' : ''">
+                <button @click="open = true" aria-label="Abrir menú"
+                    class="btn btn-ghost btn-circle text-white hover:bg-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <div x-show="open" x-cloak
+                    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    class="fixed inset-0 z-[90] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center"
+                    @keydown.escape.window="open = false">
+                    <button @click="open = false" aria-label="Cerrar menú"
+                        class="absolute top-6 right-6 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
+                                d="M6 18L18 6M6 6l12 12" />
                         </svg>
-                    </label>
-                    <ul tabindex="0"
-                        class="menu dropdown-content mt-3 z-[1] p-2 shadow-2xl bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl w-64 right-0">
-                        <li><a wire:navigate href="/"
+                    </button>
+
+                    <nav class="flex flex-col items-center gap-2 w-full px-8">
+                        @foreach([
+                            ['href' => '/', 'label' => 'Inicio', 'active' => $navActive['home'], 'navigate' => true],
+                            ['href' => '/proyectos', 'label' => 'Proyectos', 'active' => $navActive['proyectos'], 'navigate' => false],
+                            ['href' => '/fotografias', 'label' => 'Fotografía', 'active' => $navActive['fotografia'], 'navigate' => false],
+                            ['href' => '/acerca', 'label' => 'Acerca', 'active' => $navActive['acerca'], 'navigate' => false],
+                            ['href' => '/contacto', 'label' => 'Contacto', 'active' => $navActive['contacto'], 'navigate' => false],
+                        ] as $item)
+                            <a href="{{ $item['href'] }}" @if($item['navigate']) wire:navigate @endif
+                                @click="open = false"
+                                :class="open ? 'menu-item-in' : 'opacity-0'"
+                                :style="open ? { animationDelay: ({{ $loop->index }} * 70 + 60) + 'ms' } : {}"
                                 @class([
-                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
-                                    'bg-white text-black' => $navActive['home'],
-                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['home'],
+                                    'px-8 py-3 text-2xl font-bold tracking-[0.15em] uppercase rounded-full transition-colors',
+                                    'bg-white text-black' => $item['active'],
+                                    'text-gray-300 hover:text-white' => ! $item['active'],
                                 ])
-                                @if($navActive['home']) aria-current="page" @endif>Inicio</a>
-                        </li>
-                        <li><a href="/proyectos"
-                                @class([
-                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
-                                    'bg-white text-black' => $navActive['proyectos'],
-                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['proyectos'],
-                                ])
-                                @if($navActive['proyectos']) aria-current="page" @endif>Proyectos</a>
-                        </li>
-                        <li><a href="/fotografias"
-                                @class([
-                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
-                                    'bg-white text-black' => $navActive['fotografia'],
-                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['fotografia'],
-                                ])
-                                @if($navActive['fotografia']) aria-current="page" @endif>Fotografía</a>
-                        </li>
-                        <li><a href="/acerca"
-                                @class([
-                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
-                                    'bg-white text-black' => $navActive['acerca'],
-                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['acerca'],
-                                ])
-                                @if($navActive['acerca']) aria-current="page" @endif>Acerca</a>
-                        </li>
-                        <li><a href="/contacto"
-                                @class([
-                                    'rounded-xl px-3 py-2 text-sm font-semibold transition-colors',
-                                    'bg-white text-black' => $navActive['contacto'],
-                                    'text-gray-400 hover:text-white hover:bg-white/10' => ! $navActive['contacto'],
-                                ])
-                                @if($navActive['contacto']) aria-current="page" @endif>Contacto</a>
-                        </li>
-                    </ul>
+                                @if($item['active']) aria-current="page" @endif>
+                                {{ $item['label'] }}
+                            </a>
+                        @endforeach
+                    </nav>
                 </div>
             </div>
         </div>
@@ -183,10 +161,17 @@
         </div>
     </a>
 
+    <!-- Botón volver arriba -->
+    <button id="back-to-top" aria-label="Volver arriba">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
     <!-- Footer -->
     <footer class="bg-black mt-5 bg-opacity-50 text-white text-center py-4 mt-auto">
         <div class="container mx-auto">
-            <p class="text-sm font-dearest">&copy; 2026 Josue Molina. Todos los derechos reservados.</p>
+            <p class="text-sm">&copy; 2026 Josue Molina. Todos los derechos reservados.</p>
             <div class="mt-2">
                 <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="text-white hover:text-gray-300 mx-2"><i class="fab fa-twitter"></i></a>

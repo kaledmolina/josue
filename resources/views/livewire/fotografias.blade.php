@@ -7,10 +7,10 @@
     <div class="container mx-auto px-4 relative z-10">
         <!-- Header -->
         <div class="text-center mb-16" data-aos="fade-up">
-            <h1 class="text-4xl md:text-6xl font-bold font-dearest mb-6 tracking-tight">
+            <h1 data-letters class="text-4xl md:text-6xl font-bold font-dearest mb-6 tracking-tight">
                 Álbumes Fotográficos
             </h1>
-            <p class="text-gray-400 text-lg md:text-xl font-dearest max-w-2xl mx-auto">
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
                 Una colección de momentos capturados a través de mi lente, explorando la narrativa visual en cada
                 imagen.
             </p>
@@ -33,11 +33,11 @@
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($albums as $album)
-                    <a href="{{ route('album.photos', $album['id']) }}" class="group block relative" data-aos="fade-up"
+                    <a href="{{ route('album.photos', $album['id']) }}" class="tilt group block relative" data-aos="fade-up"
                         data-aos-delay="{{ $loop->index * 100 }}">
                         <!-- Card Container -->
                         <div
-                            class="relative overflow-hidden rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/10 group-hover:scale-[1.02] group-hover:shadow-2xl">
+                            class="shine relative overflow-hidden rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/10 group-hover:scale-[1.02] group-hover:shadow-2xl">
 
                             <!-- Image Wrapper -->
                             <div class="relative aspect-[4/3] overflow-hidden" x-data="{ loaded: false }">

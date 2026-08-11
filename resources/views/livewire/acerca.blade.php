@@ -13,7 +13,7 @@
             <!-- Foto de perfil con efecto -->
             <div data-aos="fade-right" class="w-full lg:w-1/3 relative group flex justify-center lg:justify-start">
                 <div
-                    class="absolute inset-0 w-64 h-64 mx-auto lg:mx-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500">
+                    class="absolute inset-0 w-64 h-64 mx-auto lg:mx-0 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500">
                 </div>
                 <img src="{{ asset('Images/LateralCamara.png') }}" alt="Josue Molina"
                     class="rounded-full shadow-2xl w-64 h-64 object-cover relative z-10 border-4 border-white/10 hover:scale-105 transition-transform duration-500">
@@ -21,14 +21,14 @@
 
             <!-- Texto presentación -->
             <div data-aos="fade-left" class="w-full lg:w-2/3 text-center lg:text-left">
-                <h1 class="text-4xl md:text-5xl font-bold font-dearest mb-6 leading-tight">
+                <h1 data-letters class="text-4xl md:text-5xl font-bold font-dearest mb-6 leading-tight">
                     <span class="text-white">
                         {{ $content->hero_title }}
                     </span>
                 </h1>
                 <div
                     class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:bg-black/70 group">
-                    <p class="text-base md:text-lg text-gray-200 font-dearest">
+                    <p class="text-base md:text-lg text-gray-200">
                         {{ $content->hero_description }}
                     </p>
                 </div>
@@ -60,14 +60,13 @@
             <div data-aos="fade-up" data-aos-delay="100"
                 class="bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all duration-300 hover:bg-black/70 group">
                 <h2 class="text-2xl md:text-3xl font-dearest text-white mb-6 flex items-center gap-3">
-                    <i class="fas fa-briefcase text-purple-400"></i> Experiencia
-                </h2>
-                <div class="relative pl-6 border-l-2 border-purple-500/30 space-y-6">
+                    <i class="fas fa-briefcase text-blue-400"></i> Experiencia
+                </h2>                    <div class="relative pl-6 border-l-2 border-blue-500/30 space-y-6">
                     <div class="relative">
                         <span
-                            class="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-purple-500 border-2 border-gray-900"></span>
+                            class="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-blue-500 border-2 border-gray-900"></span>
                         <h3 class="text-lg font-semibold text-white">{{ $content->experience_title }}</h3>
-                        <p class="text-purple-300 text-sm mb-2">{{ $content->experience_company }} |
+                        <p class="text-blue-300 text-sm mb-2">{{ $content->experience_company }} |
                             {{ $content->experience_dates }}
                         </p>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">{{ $content->experience_details }}</p>

@@ -260,7 +260,7 @@
                                                 <h3 class="text-3xl lg:text-4xl font-bold text-white font-dearest mb-6 text-shadow">
                                                     {{ $video->title }}
                                                 </h3>
-                                                <div class="text-gray-100 font-dearest text-lg leading-relaxed prose-custom text-justify">
+                                                <div class="text-gray-100 text-lg leading-relaxed prose-custom text-justify">
                                                     {!! $video->description !!}
                                                 </div>
                                             </div>
@@ -309,7 +309,7 @@
                                             <h3 class="text-xl font-bold text-white font-dearest mb-2 text-shadow line-clamp-2">
                                                 {{ $video->title }}
                                             </h3>
-                                            <div class="text-gray-200 font-dearest text-sm leading-relaxed line-clamp-3">
+                                            <div class="text-gray-200 text-sm leading-relaxed line-clamp-3">
                                                 {!! strip_tags($video->description) !!}
                                             </div>
                                         </div>
