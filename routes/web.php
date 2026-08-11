@@ -24,7 +24,7 @@ Route::get('/preview-file/{file}', function ($fileId) {
 
     // Si la imagen fue agregada por URL externa, redirigimos directamente a esa URL.
     if ($external = \App\Support\ImageUrl::normalize($file->external_url)) {
-        return redirect()->away($external);
+        return redirect()->away($external, 302, ['Cache-Control' => 'public, max-age=31536000, immutable']);
     }
 
     try {
@@ -42,22 +42,21 @@ Route::get('/preview-file/{file}', function ($fileId) {
 Route::get('/album/{album}/cover', function (Album $album) {
     // Si el álbum tiene portada por URL externa, redirigimos directamente a esa URL.
     if ($cover = \App\Support\ImageUrl::normalize($album->cover_image_url)) {
-        return redirect()->away($cover);
+        return redirect()->away($cover, 302, ['Cache-Control' => 'public, max-age=86400']);
     }
 
     try {
-        // CORRECTION: Get a random file from the album to use as cover
-        $coverFile = $album->files()->inRandomOrder()->first();
+        // Portada determinística: la foto más reciente del álbum (consistente y cacheable,
+        // evita que el navegador regrese a una portada distinta o que Drive bloquee la petición).
+        $coverFile = $album->files()->latest()->first();
 
         if (! $coverFile) {
-            // Fallback: Try to sync files if none exist (Optional, but good for robustness)
-            // For now, just abort or return a placeholder could be better, but lets stick to logic
             abort(404);
         }
 
         // Si la portada es una imagen por URL externa, redirigimos a su enlace directo.
         if ($coverFile->isExternal()) {
-            return redirect()->away(\App\Support\ImageUrl::normalize($coverFile->external_url));
+            return redirect()->away(\App\Support\ImageUrl::normalize($coverFile->external_url), 302, ['Cache-Control' => 'public, max-age=86400']);
         }
 
         $fileContents = Storage::disk($coverFile->disk)->get($coverFile->path);

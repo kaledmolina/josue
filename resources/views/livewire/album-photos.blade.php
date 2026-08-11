@@ -25,7 +25,7 @@
         <div class="flex flex-col md:flex-row items-end gap-8 mb-16 bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md"
             data-aos="fade-up">
             <div class="relative w-full md:w-64 aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 group">
-                <img src="{{ $albumData['cover'] }}" alt="Portada de {{ $albumData['title'] }}"
+                <img src="{{ $albumData['cover'] }}" alt="Portada de {{ $albumData['title'] }}" referrerpolicy="no-referrer"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy" onerror="this.onerror=null;this.src='{{ $placeholder }}'">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500">
@@ -83,6 +83,7 @@
                     </div>
 
                     <img src="{{ $photo['url'] }}" alt="{{ $photo['name'] ?? 'Foto del álbum' }}" @load="loaded = true"
+                        x-init="loaded = $el.complete" referrerpolicy="no-referrer"
                         class="w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:scale-105"
                         :class="{ 'opacity-100': loaded }" loading="lazy"
                         onerror="this.onerror=null;this.src='{{ $placeholder }}'">
@@ -141,7 +142,7 @@
                 @endif
 
                 <div class="relative max-w-7xl max-h-[90vh] p-4">
-                    <img src="{{ $photo['url'] }}" alt="{{ $photo['name'] ?? 'Imagen en tamaño completo' }}"
+                    <img src="{{ $photo['url'] }}" alt="{{ $photo['name'] ?? 'Imagen en tamaño completo' }}" referrerpolicy="no-referrer"
                         class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl ring-1 ring-white/10"
                         onerror="this.onerror=null;this.src='{{ $placeholder }}'">
 

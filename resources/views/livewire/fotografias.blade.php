@@ -53,6 +53,7 @@
 
                                 <!-- Image -->
                                 <img src="{{ $album['cover'] }}" alt="{{ $album['title'] }}" @load="loaded = true"
+                                    x-init="loaded = $el.complete" referrerpolicy="no-referrer"
                                     class="w-full h-full object-cover transition-all duration-700 opacity-0 group-hover:scale-110 group-hover:rotate-1"
                                     :class="{ 'opacity-100': loaded }" loading="lazy"
                                     onerror="this.onerror=null;this.src='{{ $placeholder }}'">
