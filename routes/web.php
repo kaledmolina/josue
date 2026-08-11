@@ -1,18 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-use App\Livewire\Home;
-use App\Livewire\Videos;
-use App\Livewire\Fotografias;
-use App\Livewire\AlbumPhotos;
-use App\Livewire\Proyectos;
-use App\Livewire\Contacto;
 use App\Livewire\Acerca;
-use App\Models\File;
-use Illuminate\Support\Facades\Storage;
+use App\Livewire\AlbumPhotos;
+use App\Livewire\Contacto;
+use App\Livewire\Fotografias;
+use App\Livewire\Home;
+use App\Livewire\Proyectos;
+use App\Livewire\Videos;
 use App\Models\Album;
-
+use App\Models\File;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', Home::class)->name('home');
 Route::get('/fotografias', Fotografias::class)->name('fotografias');
@@ -24,37 +22,52 @@ Route::get('/acerca', Acerca::class);
 Route::get('/preview-file/{file}', function ($fileId) {
     $file = \App\Models\File::findOrFail($fileId);
 
+    // Si la imagen fue agregada por URL externa, redirigimos directamente a esa URL.
+    if ($external = \App\Support\ImageUrl::normalize($file->external_url)) {
+        return redirect()->away($external);
+    }
+
     try {
         $fileContents = Storage::disk('google')->get($file->path);
 
         return response($fileContents)
             ->header('Content-Type', $file->mime_type)
-            ->header('Content-Disposition', 'inline; filename="' . $file->name . '"');
+            ->header('Content-Disposition', 'inline; filename="'.$file->name.'"');
     } catch (\Exception $e) {
-        \Illuminate\Support\Facades\Log::error('Google Drive Error for file ' . $fileId . ': ' . $e->getMessage());
+        \Illuminate\Support\Facades\Log::error('Google Drive Error for file '.$fileId.': '.$e->getMessage());
         abort(404);
     }
 })->name('file.preview');
 
 Route::get('/album/{album}/cover', function (Album $album) {
+    // Si el álbum tiene portada por URL externa, redirigimos directamente a esa URL.
+    if ($cover = \App\Support\ImageUrl::normalize($album->cover_image_url)) {
+        return redirect()->away($cover);
+    }
+
     try {
         // CORRECTION: Get a random file from the album to use as cover
         $coverFile = $album->files()->inRandomOrder()->first();
 
-        if (!$coverFile) {
+        if (! $coverFile) {
             // Fallback: Try to sync files if none exist (Optional, but good for robustness)
             // For now, just abort or return a placeholder could be better, but lets stick to logic
             abort(404);
+        }
+
+        // Si la portada es una imagen por URL externa, redirigimos a su enlace directo.
+        if ($coverFile->isExternal()) {
+            return redirect()->away(\App\Support\ImageUrl::normalize($coverFile->external_url));
         }
 
         $fileContents = Storage::disk($coverFile->disk)->get($coverFile->path);
 
         return response($fileContents)
             ->header('Content-Type', $coverFile->mime_type)
-            ->header('Content-Disposition', 'inline; filename="' . $coverFile->name . '"')
+            ->header('Content-Disposition', 'inline; filename="'.$coverFile->name.'"')
             ->header('Cache-Control', 'public, max-age=31536000');
     } catch (\Exception $e) {
-        \Illuminate\Support\Facades\Log::error('Album Cover Error: ' . $e->getMessage());
+        \Illuminate\Support\Facades\Log::error('Album Cover Error: '.$e->getMessage());
         abort(404);
     }
 })->name('album.cover');

@@ -4,24 +4,25 @@ namespace App\Filament\Resources;
 
 use App\Models\File;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Storage;
-use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteAction;
-
 
 class FileResource extends Resource
 {
     protected static ?string $model = File::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-document';
+
     protected static ?string $navigationGroup = 'Galeria';
-    
 
     public static function form(Form $form): Form
     {
@@ -29,7 +30,7 @@ class FileResource extends Resource
             ->schema([
                 Forms\Components\Select::make('album_id')
                     ->label('Álbum')
-                    ->relationship(name: 'album', titleAttribute: 'title') // Configuración correcta
+                    ->relationship(name: 'album', titleAttribute: 'title')
                     ->searchable()
                     ->preload()
                     ->required()
@@ -41,24 +42,51 @@ class FileResource extends Resource
                             ->disk('google')
                             ->directory('albums/covers')
                             ->image()
-                            ->required()
+                            ->required(),
                     ]),
-                FileUpload::make('path')
-                ->disk('google')
-                ->preserveFilenames()
-                ->acceptedFileTypes(['image/*'])
-                ->required()
-                ->columnSpanFull(),
-                    
+
+                Forms\Components\Section::make('Imagen')
+                    ->description('Sube un archivo desde tu equipo o pega el enlace directo de una imagen.')
+                    ->schema([
+
+                        Toggle::make('is_external')
+                            ->onIcon('heroicon-o-link')
+                            ->offIcon('heroicon-o-photo')
+                            ->label('Usar enlace externo (URL de imagen)')
+                            ->helperText('Actívalo para pegar el enlace de una imagen en lugar de subir un archivo.')
+                            ->live()
+                            ->default(false)
+                            ->columnSpanFull(),
+
+                        Forms\Components\TextInput::make('external_url')
+                            ->label('URL de la imagen')
+                            ->placeholder('https://ejemplo.com/imagen.jpg')
+                            ->helperText('Pega el enlace directo de la imagen. También acepta enlaces públicos de Google Drive.')
+                            ->visible(fn (Get $get): bool => (bool) $get('is_external'))
+                            ->required(fn (Get $get): bool => (bool) $get('is_external'))
+                            ->columnSpanFull(),
+
+                        FileUpload::make('path')
+                            ->disk('google')
+                            ->preserveFilenames()
+                            ->image()
+                            ->imageEditor()
+                            ->helperText('Formatos: JPG, PNG, WebP, GIF…')
+                            ->visible(fn (Get $get): bool => ! (bool) $get('is_external'))
+                            ->required(fn (Get $get): bool => ! (bool) $get('is_external'))
+                            ->columnSpanFull(),
+                    ]),
+
                 Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                    
+                    ->label('Nombre')
+                    ->helperText('Opcional. Se completa automáticamente con el nombre del archivo o de la URL.')
+                    ->maxLength(255)
+                    ->columnSpanFull(),
+
                 Forms\Components\TextInput::make('mime_type')
-                    ->required(),
-                    
+                    ->hidden(),
                 Forms\Components\TextInput::make('size')
-                    ->required(),
+                    ->hidden(),
             ]);
     }
 
@@ -67,40 +95,68 @@ class FileResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('url')
-    ->label('Imagen')
-    ->width(75)
-    ->height(75) // Agrega esta línea
-    ->state(function ($record) {
-        return $record->exists ? $record->url : null;
-    }),
-                
-            Tables\Columns\TextColumn::make('name')
-                ->searchable()
-                ->sortable()
-                ->description(fn ($record) => $record->url)
-                ->wrap(),
-                
-            Tables\Columns\TextColumn::make('size')
-                ->formatStateUsing(fn ($state) => number_format($state / 1024, 2).' KB')
-                ->sortable(),
+                    ->label('Imagen')
+                    ->width(75)
+                    ->height(75)
+                    ->state(function ($record) {
+                        return $record->exists ? $record->url : null;
+                    }),
+
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable()
+                    ->sortable()
+                    ->description(fn ($record) => $record->url)
+                    ->wrap()
+                    ->limit(40),
+
+                Tables\Columns\TextColumn::make('album.title')
+                    ->label('Álbum')
+                    ->badge()
+                    ->color('gray')
+                    ->searchable(),
+
+                Tables\Columns\IconColumn::make('external_url')
+                    ->label('Tipo')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-link')
+                    ->trueColor('info')
+                    ->falseIcon('heroicon-o-photo')
+                    ->falseColor('success')
+                    ->tooltip(fn ($state) => $state ? 'Enlace externo' : 'Archivo subido'),
+
+                Tables\Columns\TextColumn::make('size')
+                    ->formatStateUsing(fn ($state) => $state ? number_format($state / 1024, 2).' KB' : '—')
+                    ->sortable(),
             ])
             ->actions([
                 Tables\Actions\Action::make('download')
                     ->label('Descargar')
                     ->icon('heroicon-o-arrow-down-tray')
-                    ->action(function ($record) {
-                        return Storage::disk('google')->download($record->path);
+                    ->visible(fn (File $record) => ! $record->isExternal())
+                    ->action(function (File $record) {
+                        return Storage::disk($record->disk ?? 'google')->download($record->path);
                     }),
-                    
-                    Tables\Actions\EditAction::make()
+
+                Tables\Actions\Action::make('open_external')
+                    ->label('Abrir enlace')
+                    ->icon('heroicon-o-arrow-top-right-on-square')
+                    ->color('info')
+                    ->visible(fn (File $record) => $record->isExternal())
+                    ->url(fn (File $record) => $record->external_url)
+                    ->openUrlInNewTab(),
+
+                EditAction::make()
                     ->mutateRecordDataUsing(function (array $data): array {
                         unset($data['url']); // Elimina la URL del estado del componente
+
                         return $data;
                     }),
-                
-                Tables\Actions\DeleteAction::make()
-                    ->before(function ($record) {
-                        Storage::disk('google')->delete($record->path);
+
+                DeleteAction::make()
+                    ->before(function (File $record) {
+                        if (! $record->isExternal() && $record->path) {
+                            Storage::disk($record->disk ?? 'google')->delete($record->path);
+                        }
                     }),
             ]);
     }

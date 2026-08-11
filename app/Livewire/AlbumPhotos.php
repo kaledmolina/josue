@@ -2,13 +2,16 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Album;
+use Livewire\Component;
 
 class AlbumPhotos extends Component
 {
     public $album;
-    public $selectedPhoto = null;
+
+    public $photos = [];
+
+    public $selectedIndex = null;
 
     public function mount($albumId)
     {
@@ -18,16 +21,47 @@ class AlbumPhotos extends Component
     protected function loadAlbum($albumId)
     {
         $this->album = Album::with('files')->findOrFail($albumId);
+
+        $this->photos = $this->album->files
+            ->sortByDesc('created_at')
+            ->values()
+            ->map(fn ($file) => [
+                'url' => $file->url,
+                'name' => $file->name,
+            ])
+            ->toArray();
     }
 
-    public function selectPhoto($photoUrl)
+    public function selectPhoto($index)
     {
-        $this->selectedPhoto = $photoUrl;
+        if (! isset($this->photos[$index])) {
+            return;
+        }
+
+        $this->selectedIndex = (int) $index;
+    }
+
+    public function nextPhoto()
+    {
+        if ($this->selectedIndex === null || empty($this->photos)) {
+            return;
+        }
+
+        $this->selectedIndex = ($this->selectedIndex + 1) % count($this->photos);
+    }
+
+    public function prevPhoto()
+    {
+        if ($this->selectedIndex === null || empty($this->photos)) {
+            return;
+        }
+
+        $this->selectedIndex = ($this->selectedIndex - 1 + count($this->photos)) % count($this->photos);
     }
 
     public function closePhoto()
     {
-        $this->selectedPhoto = null;
+        $this->selectedIndex = null;
     }
 
     public function render()
@@ -36,11 +70,9 @@ class AlbumPhotos extends Component
             'albumData' => [
                 'title' => $this->album->title,
                 'cover' => $this->album->cover_url,
-                'photos' => $this->album->files->map(function($file) {
-                    return $file->url;
-                })->toArray(),
-                'date' => $this->album->created_at->format('d M Y')
-            ]
+                'photos' => $this->photos,
+                'date' => $this->album->created_at->format('d M Y'),
+            ],
         ]);
     }
 }
